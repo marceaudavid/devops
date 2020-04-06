@@ -1,0 +1,17 @@
+version: "3"
+services:
+  api:
+    container_name: api
+    build: ./api
+  server:
+    container_name: server
+    build: ./server
+  database:
+    container_name: database
+    build: ./database
+  generate:
+    container_name: generate
+    build: ./scripts/generate
+  collect:
+    container_name: collect
+    build: ./scripts/collect
