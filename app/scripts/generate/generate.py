@@ -35,7 +35,7 @@ def generate_weight_of_milk_in_tank():
 data = {'robots': []}
 
 
-def generate_a_unit(previous_weight_of_milk, iterate):
+def generate_a_robot(previous_weight_of_milk, iterate):
     new_weight_of_milk = generate_weight_of_milk_in_tank()
     if iterate == 0:
         tank_weight_difference = 0
@@ -46,7 +46,7 @@ def generate_a_unit(previous_weight_of_milk, iterate):
     print("tank weight difference :", tank_weight_difference)
     data['robots'].append({
         "Unit number": generate_unit_number(default_unit_number),
-        "Robot number": i + 1,
+        "Robot number": iterate + 1,
         "Robot type": generate_robot_type(),
         "Tank temperature (Celsius)": generate_tank_temperature(),
         "External temperature (Celsius)": external_temperature(),
@@ -69,8 +69,11 @@ def generate_json(unit_data):
         json.dump(unit_data, outfile, indent=4)
 
 
-for i in range(10):
-    generate_new_weight_of_milk = generate_weight_of_milk_in_tank()
-    generate_a_unit(generate_new_weight_of_milk, i)
+def generate_a_unit():
+    for i in range(10):
+        generate_new_weight_of_milk = generate_weight_of_milk_in_tank()
+        generate_a_robot(generate_new_weight_of_milk, i)
 
+
+generate_a_unit()
 generate_json(data)
