@@ -47,7 +47,7 @@ def get_k_measure():
     return round(random.uniform(35, 48))
 
 
-def get_naci_concentration():
+def get_nacl_concentration():
     return round(random.uniform(1, 1.71), 2)
 
 
@@ -82,7 +82,7 @@ def generate_a_robot(iterate):
     external_temperature = get_external_temperature()
     ph_measure = get_ph_measure()
     k_measure = get_k_measure()
-    naci_concentration = get_naci_concentration()
+    nacl_concentration = get_nacl_concentration()
     salmonella_bacterium_level = get_salmonella_bacterium_level()
     e_coli_bacterium_level = get_e_coli_bacterium_level()
     listeria_bacterium_level = get_listeria_bacterium_level()
@@ -97,7 +97,7 @@ def generate_a_robot(iterate):
         "Weight ok milk difference (Kg)": weight_of_milk_difference,
         "pH measure": ph_measure,
         "K+ measure (mg/litre)": k_measure,
-        "NaCL concentration (g/litre)": naci_concentration,
+        "NaCL concentration (g/litre)": nacl_concentration,
         "Salmonella bacterium level (ppm)": salmonella_bacterium_level,
         "E-coli bacterium level (ppm)": e_coli_bacterium_level,
         "Listeria bacterium level (ppm)": listeria_bacterium_level,
@@ -113,7 +113,7 @@ def generate_a_robot(iterate):
         "weight_of_milk_difference": weight_of_milk_difference,
         "ph_measure": ph_measure,
         "k_measure": k_measure,
-        "naci_concentration": naci_concentration,
+        "nacl_concentration": nacl_concentration,
         "salmonella_bacterium_level": salmonella_bacterium_level,
         "e_coli_bacterium_level": e_coli_bacterium_level,
         "listeria_bacterium_level": listeria_bacterium_level,
@@ -129,9 +129,10 @@ def generate_a_robot(iterate):
                     "weight_of_milk_difference,"
                     "ph_measure,"
                     "k_measure,"
-                    "naci_concentration,"
+                    "nacl_concentration,"
                     "salmonella_bacterium_level,"
-                    "e_coli_bacterium_level) "
+                    "e_coli_bacterium_level,"
+                    "listeria_bacterium_level) "
                     "VALUES ("
                     "%(unit_number)s,"
                     "%(robot_number)s,"
@@ -142,9 +143,10 @@ def generate_a_robot(iterate):
                     "%(weight_of_milk_difference)s,"
                     "%(ph_measure)s,"
                     "%(k_measure)s,"
-                    "%(naci_concentration)s,"
+                    "%(nacl_concentration)s,"
                     "%(salmonella_bacterium_level)s,"
-                    "%(e_coli_bacterium_level)s"
+                    "%(e_coli_bacterium_level)s,"
+                    "%(listeria_bacterium_level)s"
                     ")"
                  )
     cursor.execute(add_robot, data_robot)
