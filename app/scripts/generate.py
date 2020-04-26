@@ -7,8 +7,6 @@ import os
 import mysql.connector
 from datetime import datetime
 
-# print(os.environ)
-
 # replace this with database value to swap to unit 2, 3... and implement change every 10 robot
 default_unit_number = 1
 
@@ -174,7 +172,7 @@ def generate_json(unit_data, i):
     timestamp_to_string = datetime.utcfromtimestamp(
         timestamp).strftime('%Y-%m-%d %H-%M-%S')
 
-    filename = str(i + 1) + "-" + timestamp_to_string + ".json"
+    filename = str(int(i) + 1) + "-" + timestamp_to_string + ".json"
 
     # Generate json file with a unit of 10 robots :
 
@@ -189,9 +187,8 @@ def generate_a_unit(unit_number):
 
 def execute_generation():
     global data
-    # for y in range(5):
-    generate_a_unit(1)
-    # generate_json(data, 1)
+    generate_a_unit(os.environ["UNIT"])
+    # generate_json(data, os.environ["UNIT"])
     # Must empty the data, otherwise each json concatenate with the previous Unit values
     data = {'robots': []}
     threading.Timer(60.0, execute_generation).start()

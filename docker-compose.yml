@@ -16,21 +16,58 @@ services:
       - .env
     ports:
       - "3000:3000"
-  generate:
-    container_name: generate
-    build: ./app/scripts/generate
-    restart: always
-    depends_on:
-      - db
-    env_file:
-      - .env
   web:
     container_name: web
     build: ./app/web
-    depends_on:
-      - api
     ports:
       - "8080:80"
-  # collect:
-  #   container_name: collect
-  #   build: ./scripts/collect
+  unit_1:
+    container_name: unit_1
+    build: ./app/scripts/
+    restart: always
+    depends_on:
+      - db
+    environment:
+      UNIT: 1
+    env_file:
+      - .env
+  unit_2:
+    container_name: unit_2
+    build: ./app/scripts/
+    restart: always
+    depends_on:
+      - db
+    environment:
+      UNIT: 2
+    env_file:
+      - .env
+  unit_3:
+    container_name: unit_3
+    build: ./app/scripts/
+    restart: always
+    depends_on:
+      - db
+    environment:
+      UNIT: 3
+    env_file:
+      - .env
+  unit_4:
+    container_name: unit_4
+    build: ./app/scripts/
+    restart: always
+    depends_on:
+      - db
+    environment:
+      UNIT: 4
+    env_file:
+      - .env
+  unit_5:
+    container_name: unit_5
+    build: ./app/scripts/
+    restart: always
+    depends_on:
+      - db
+    environment:
+      UNIT: 5
+    env_file:
+      - .env

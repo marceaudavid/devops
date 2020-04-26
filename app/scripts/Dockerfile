@@ -4,4 +4,4 @@ ADD generate.py /
 
 RUN pip install mysql-connector
 
-CMD [ "python", "./generate.py" ]
+CMD ["python", "./generate.py" ]
