@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
 
 function getRobot(id) {
   return new Promise((resolve, reject) => {
-    connection.query('SELECT * FROM robots WHERE robot_number = ?', [id], function (
+    connection.query('SELECT * FROM robots WHERE id = ?', [id], function (
       error,
       results,
       fields
@@ -36,7 +36,25 @@ function getRobots() {
   });
 }
 
+function getRobotByUnit(unitId) {
+  return new Promise((resolve, reject) => {
+    connection.query('SELECT * FROM robots WHERE unit_number = ?', [unitId], function (
+      error,
+      results,
+      fields
+    ) {
+      if (error) {
+        console.log(error);
+        reject({ code: 500, error });
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
 module.exports = {
   getRobot,
   getRobots,
+  getRobotByUnit
 };
