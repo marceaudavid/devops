@@ -16,15 +16,6 @@ cnx = mysql.connector.connect(user='root', password='root',
 cursor = cnx.cursor(buffered=True)
 
 
-# def get_unit_number(number):
-#     if number <= 10:
-#         number = 1
-#         return number
-#     else:
-#         number += 1
-#         return number
-
-
 def get_robot_type():
     return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(12))
 
@@ -193,10 +184,10 @@ def generate_a_unit(unit_number):
 
 def execute_generation():
     global data
-    for y in range(5):
-        generate_a_unit(y + 1)
-        generate_json(data, y)
-        data = {'robots': []}  # Must empty the data, otherwise each json concatenate with the previous Unit values
+    # for y in range(5):
+    #     generate_a_unit(y + 1)
+    #     generate_json(data, y)
+    #     data = {'robots': []}  # Must empty the data, otherwise each json concatenate with the previous Unit values
     threading.Timer(60.0, execute_generation).start()
 
 
