@@ -15,7 +15,7 @@
 
       <div class="button-col">
         <div class="row">
-          <a class="button-get" @click="getFavoriot()">
+          <a class="button-get" @click="get()">
             <img src="../assets/cloud-download-outline.svg" alt="cloud-download" />
           </a>
         </div>
@@ -41,15 +41,198 @@ export default {
     return {
       datacollection: null,
       loaded: false,
-      temperature: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      humidity: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
-      potentio: [4, 6, 4, 6, 4, 6, 4, 6, 4, 6],
-      time: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      temperatureCuve: [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      temperatureExterieur: [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      poidLait: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+      poidProduitFini: [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      MesurePH: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+      MesureK: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+      ConcentrationNaCi: [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      NiveauSalmonelle: [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ],
+      NiveauEColis: [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      NiveauBactérienListeria: [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ],
+      time: [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
     };
   },
   mounted() {
     this.fillData();
-    this.getFavoriot();
+    this.get();
   },
   methods: {
     fillData() {
@@ -57,72 +240,163 @@ export default {
         labels: this.time,
         datasets: [
           {
-            label: "Temp (°C)",
+            label: "Température de la cuve (°C)",
             backgroundColor: "rgba(255, 0, 0, 0.2)",
             borderColor: "lightpink",
             pointBackgroundColor: "red",
             borderWidth: 1,
             pointBorderColor: "red",
-            data: this.temperature
+            data: this.temperatureCuve
           },
           {
-            label: "Hum (%)",
+            label: "Température extérieur (°C)",
             backgroundColor: "rgba(0, 0, 255, 0.2)",
             borderColor: "lightblue",
             pointBackgroundColor: "blue",
             borderWidth: 1,
             pointBorderColor: "blue",
-            data: this.humidity
+            data: this.temperatureExterieur
           },
           {
-            label: "Potentio",
+            label: "Poid du lait (Kg)",
             backgroundColor: "rgba(255, 255, 0, 0.2)",
             borderColor: "orange",
             pointBackgroundColor: "orange",
             borderWidth: 1,
             pointBorderColor: "orange",
-            data: this.potentio
+            data: this.poidLait
+          },
+          {
+            label: "Poid du produit fini (Kg)",
+            backgroundColor: "rgb(138, 43, 226, 0.2)",
+            borderColor: "BlueViolet",
+            pointBackgroundColor: "BlueViolet",
+            borderWidth: 1,
+            pointBorderColor: "BlueViolet",
+            data: this.poidProduitFini
+          },
+          {
+            label: "Mesure du PH",
+            backgroundColor: "rgb(0, 255, 255, 0.2)",
+            borderColor: "Cyan",
+            pointBackgroundColor: "Cyan",
+            borderWidth: 1,
+            pointBorderColor: "Cyan",
+            data: this.MesurePH
+          },
+          {
+            label: "Mesure K+ (mg/L)",
+            backgroundColor: "rgb(169,169,169, 0.2)",
+            borderColor: "DarkGray",
+            pointBackgroundColor: "DarkGray",
+            borderWidth: 1,
+            pointBorderColor: "DarkGray",
+            data: this.MesureK
+          },
+          {
+            label: "Concentration NaCi",
+            backgroundColor: "rgb(165, 42, 42, 0.2)",
+            borderColor: "Brown",
+            pointBackgroundColor: "Brown",
+            borderWidth: 1,
+            pointBorderColor: "Brown",
+            data: this.ConcentrationNaCi
+          },
+          {
+            label: "Niveau de salmonelle (ppm)",
+            backgroundColor: "rgb(255,215,0, 0.2)",
+            borderColor: "Gold",
+            pointBackgroundColor: "Gold",
+            borderWidth: 1,
+            pointBorderColor: "Gold",
+            data: this.NiveauSalmonelle
+          },
+          {
+            label: "Niveau E-coli (ppm)",
+            backgroundColor: "rgb(255,250,205, 0.2)",
+            borderColor: "LemonChiffon",
+            pointBackgroundColor: "LemonChiffon",
+            borderWidth: 1,
+            pointBorderColor: "LemonChiffon",
+            data: this.NiveauEColis
+          },
+          {
+            label: "Niveau bactérien listeria (ppm)",
+            backgroundColor: "rgb(138, 43, 226, 0.2)",
+            borderColor: "Purple",
+            pointBackgroundColor: "Purple",
+            borderWidth: 1,
+            pointBorderColor: "Purple",
+            data: this.NiveauBactérienListeria
           }
         ]
       };
     },
-    // get favoriot
-    getFavoriot() {
-      var url =
-        "https://apiv2.favoriot.com/v2/streams?device_developer_id=projectDefault@ElCoCoZooKa5&max=10";
+    // get
+    get() {
+      var url = "localhost:3000/robot";
       var headers = {
         headers: {
-          "Content-Type": "application/json",
-          apikey:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVsQ29Db1pvb0thNSIsInJlYWRfd3JpdGUiOnRydWUsImlhdCI6MTU4NzQ5ODMzNH0.7i-dZ-qAk7_Gy5k_5_Bc_6sbIU7TyGTondZAVkUXC6w"
+          "Content-Type": "application/json"
         }
       };
       axios
         .get(url, headers)
         .then(x => {
+          console.log(x);
           var results = x.data.results;
-          var temp = [];
-          var hum = [];
-          var pot = [];
+          var temperatureCuve = [];
+          var temperatureExterieur = [];
+          var poidLait = [];
+          var poidProduitFini = [];
+          var MesurePH = [];
+          var MesureK = [];
+          var ConcentrationNaCi = [];
+          var NiveauSalmonelle = [];
+          var NiveauEColis = [];
+          var NiveauBactérienListeria = [];
           var time = [];
-          for (var i = 9; i >= 0; i--) {
-            var t = parseInt(results[i].data.Temperature);
-            var h = parseInt(results[i].data.Humidity);
-            var p = parseInt(results[i].data.Potentio);
-            var ti = results[i].stream_created_at.split("T");
+          for (var i = 20; i >= 0; i--) {
+            var tc = parseInt(results[i].data.temperatureCuve);
+            var te = parseInt(results[i].data.temperatureExterieur);
+            var pl = parseInt(results[i].data.poidLait);
+            var pdf = parseInt(results[i].data.poidProduitFini);
+            var mp = parseInt(results[i].data.MesurePH);
+            var mk = parseInt(results[i].data.MesureK);
+            var cn = parseInt(results[i].data.ConcentrationNaCi);
+            var ns = parseInt(results[i].data.NiveauSalmonelle);
+            var nec = parseInt(results[i].data.NiveauEColis);
+            var nbl = parseInt(results[i].data.NiveauBactérienListeria);
 
-            temp.push(t);
-            hum.push(h);
-            pot.push(p);
+            var ti = results[i].stream_created_at.split("T");
+            temperatureCuve.push(tc);
+            temperatureExterieur.push(te);
+            poidLait.push(pl);
+            poidProduitFini.push(pdf);
+            MesurePH.push(mp);
+            MesureK.push(mk);
+            ConcentrationNaCi.push(cn);
+            NiveauSalmonelle.push(ns);
+            NiveauEColis.push(nec);
+            NiveauBactérienListeria.push(nbl);
+
             time.push(ti);
           }
           // console.log(results)
           // console.log(temp)
           // console.log(hum)
           // console.log(pot)
-          this.temperature = temp;
-          this.humidity = hum;
-          this.potentio = pot;
+          this.temperatureCuve = temperatureCuve;
+          this.temperatureExterieur = temperatureExterieur;
+          this.poidLait = poidLait;
+          this.poidProduitFini = poidProduitFini;
+          this.MesurePH = MesurePH;
+          this.MesureK = MesureK;
+          this.ConcentrationNaCi = ConcentrationNaCi;
+          this.NiveauSalmonelle = NiveauSalmonelle;
+          this.NiveauEColis = NiveauEColis;
+          this.NiveauBactérienListeria = NiveauBactérienListeria;
+
           this.time = time;
           this.loaded = true;
           this.fillData();
@@ -130,41 +404,6 @@ export default {
         .catch(() => {
           alert("Failed to get the data 😭");
         });
-    },
-    // post favoriot
-    postFavoriot() {
-      var url = "https://apiv2.favoriot.com/v2/streams";
-      var headers = {
-        headers: {
-          "Content-Type": "application/json",
-          apikey:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVsQ29Db1pvb0thNSIsInJlYWRfd3JpdGUiOnRydWUsImlhdCI6MTU4NzQ5ODMzNH0.7i-dZ-qAk7_Gy5k_5_Bc_6sbIU7TyGTondZAVkUXC6w"
-        }
-      };
-      var dataBody = {
-        device_developer_id: "projectDefault@ElCoCoZooKa5",
-        data: {
-          Temperature: this.$refs.temp.value,
-          Humidity: this.$refs.hum.value,
-          Potentio: this.$refs.pot.value
-        }
-      };
-      var checkUnit = document.Form.unit.value;
-
-      if (checkUnit == "") {
-        alert("Please complete the entire form");
-        return false;
-      } else {
-        axios
-          .post(url, dataBody, headers)
-          .then(() => {
-            alert("Data posted successfully! 😍");
-            this.getFavoriot();
-          })
-          .catch(() => {
-            alert("Failed to post the data 😭");
-          });
-      }
     }
   }
 };
@@ -244,6 +483,7 @@ form {
   width: 100%;
   height: 2rem;
   border: none;
+  cursor: pointer;
   border-bottom: 1px black solid;
   /* -webkit-appearance: none; */
   margin: 0;
@@ -272,6 +512,7 @@ form {
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+  cursor: pointer;
 }
 img {
   width: 50%;
