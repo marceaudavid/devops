@@ -13,7 +13,7 @@ cnx = mysql.connector.connect(user='root', password='root',
                               host='127.0.0.1',
                               database='devops')
 
-cursor = cnx.cursor()
+cursor = cnx.cursor(buffered=True)
 
 
 # def get_unit_number(number):
@@ -68,17 +68,34 @@ def get_listeria_bacterium_level():
 data = {'robots': []}
 
 
+def get_previous_weight_of_milk_in_tank(robot_number, unit_number):
+
+    # Get the last value of the weight of milk in tank for the robot :
+
+    cursor.execute(
+        "SELECT weight_of_milk_in_tank FROM robots WHERE id IN (SELECT max(id) FROM robots WHERE robot_number = " + str(
+            robot_number) + " AND unit_number = " + str(unit_number) + ");")
+
+    records = cursor.fetchall()
+    for row in records:
+        result = row[0]
+        if result is None:
+            return 0
+        else:
+            return result
+
+
 def generate_a_robot(iterate, unit_number):
     weight_of_milk_in_tank = get_weight_of_milk_in_tank()
 
-    if iterate == 0:
+    robot_number = iterate + 1
+    unit_number = unit_number
+
+    if get_previous_weight_of_milk_in_tank(robot_number, unit_number) is None:
         weight_of_milk_difference = 0
     else:
-        # Faire un select :récupérer weight_of_milk_in_tank du robot précédent et remplacer -1 par cette value
-        weight_of_milk_difference = weight_of_milk_in_tank - 1
+        weight_of_milk_difference = weight_of_milk_in_tank - get_previous_weight_of_milk_in_tank(robot_number, unit_number)
 
-    unit_number = unit_number
-    robot_number = iterate + 1
     robot_type = get_robot_type()
     tank_temperature = get_tank_temperature()
     external_temperature = get_external_temperature()
