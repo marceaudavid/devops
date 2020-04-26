@@ -334,7 +334,7 @@ export default {
     },
     // get
     get() {
-      var url = "localhost:3000/robot";
+      var url = "http://localhost:3000/robot";
       var headers = {
         headers: {
           "Content-Type": "application/json"
@@ -343,8 +343,9 @@ export default {
       axios
         .get(url, headers)
         .then(x => {
-          console.log(x);
-          var results = x.data.results;
+          console.log(x.data);
+
+          var results = x.data;
           var temperatureCuve = [];
           var temperatureExterieur = [];
           var poidLait = [];
@@ -357,16 +358,16 @@ export default {
           var NiveauBactérienListeria = [];
           var time = [];
           for (var i = 20; i >= 0; i--) {
-            var tc = parseInt(results[i].data.temperatureCuve);
-            var te = parseInt(results[i].data.temperatureExterieur);
-            var pl = parseInt(results[i].data.poidLait);
-            var pdf = parseInt(results[i].data.poidProduitFini);
-            var mp = parseInt(results[i].data.MesurePH);
-            var mk = parseInt(results[i].data.MesureK);
-            var cn = parseInt(results[i].data.ConcentrationNaCi);
-            var ns = parseInt(results[i].data.NiveauSalmonelle);
-            var nec = parseInt(results[i].data.NiveauEColis);
-            var nbl = parseInt(results[i].data.NiveauBactérienListeria);
+            var tc = parseInt(results[i].tank_temperature);
+            var te = parseInt(results[i].external_temperature);
+            var pl = parseInt(results[i].weight_of_milk_in_tank);
+            var pdf = parseInt(results[i].weight_of_milk_difference);
+            var mp = parseInt(results[i].ph_measure);
+            var mk = parseInt(results[i].k_measure);
+            var cn = parseInt(results[i].nacl_concentration);
+            var ns = parseInt(results[i].salmonella_bacterium_level);
+            var nec = parseInt(results[i].e_coli_bacterium_level);
+            var nbl = parseInt(results[i].listeria_bacterium_level);
 
             var ti = results[i].stream_created_at.split("T");
             temperatureCuve.push(tc);
@@ -401,7 +402,9 @@ export default {
           this.loaded = true;
           this.fillData();
         })
-        .catch(() => {
+        .catch(err => {
+          console.log(err);
+
           alert("Failed to get the data 😭");
         });
     }

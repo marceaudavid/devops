@@ -57,6 +57,10 @@ def get_listeria_bacterium_level():
     return round(random.uniform(28, 55))
 
 
+def get_time():
+    return time.strftime('%Y-%m-%d %H:%M:%S')
+
+
 data = {'robots': []}
 
 
@@ -98,6 +102,7 @@ def generate_a_robot(iterate, unit_number):
     salmonella_bacterium_level = get_salmonella_bacterium_level()
     e_coli_bacterium_level = get_e_coli_bacterium_level()
     listeria_bacterium_level = get_listeria_bacterium_level()
+    creation_time = get_time()
 
     data['robots'].append({
         "Unit number": unit_number,
@@ -129,6 +134,7 @@ def generate_a_robot(iterate, unit_number):
         "salmonella_bacterium_level": salmonella_bacterium_level,
         "e_coli_bacterium_level": e_coli_bacterium_level,
         "listeria_bacterium_level": listeria_bacterium_level,
+        "creation_time": creation_time
     }
 
     add_robot = ("INSERT INTO robots "
@@ -144,7 +150,8 @@ def generate_a_robot(iterate, unit_number):
                  "nacl_concentration,"
                  "salmonella_bacterium_level,"
                  "e_coli_bacterium_level,"
-                 "listeria_bacterium_level) "
+                 "listeria_bacterium_level,"
+                 "creation_time)"
                  "VALUES ("
                  "%(unit_number)s,"
                  "%(robot_number)s,"
@@ -158,7 +165,8 @@ def generate_a_robot(iterate, unit_number):
                  "%(nacl_concentration)s,"
                  "%(salmonella_bacterium_level)s,"
                  "%(e_coli_bacterium_level)s,"
-                 "%(listeria_bacterium_level)s"
+                 "%(listeria_bacterium_level)s,"
+                 "%(creation_time)s"
                  ")"
                  )
     cursor.execute(add_robot, data_robot)
@@ -167,7 +175,6 @@ def generate_a_robot(iterate, unit_number):
 
 def generate_json(unit_data, i):
     # Generate uniq name :
-
     timestamp = time.time()
     timestamp_to_string = datetime.utcfromtimestamp(
         timestamp).strftime('%Y-%m-%d %H-%M-%S')
