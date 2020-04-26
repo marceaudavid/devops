@@ -197,7 +197,7 @@ def execute_generation():
         generate_a_unit(y + 1)
         generate_json(data, y)
         data = {'robots': []}  # Must empty the data, otherwise each json concatenate with the previous Unit values
-    threading.Timer(15.0, execute_generation).start()
+    threading.Timer(60.0, execute_generation).start()
 
 
 execute_generation()
