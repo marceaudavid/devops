@@ -3,15 +3,18 @@ import random
 import threading
 import string
 import time
+import os
 import mysql.connector
 from datetime import datetime
 
-default_unit_number = 1  # replace this with database value to swap to unit 2, 3... and implement change every 10 robot
+# print(os.environ)
+
+# replace this with database value to swap to unit 2, 3... and implement change every 10 robot
+default_unit_number = 1
 
 
-cnx = mysql.connector.connect(user='root', password='root',
-                              host='127.0.0.1',
-                              database='devops')
+cnx = mysql.connector.connect(user=os.environ['MYSQL_USER'], password=os.environ['MYSQL_PASSWORD'],
+                              host=os.environ['MYSQL_HOST'], database=os.environ['MYSQL_DATABASE'])
 
 cursor = cnx.cursor(buffered=True)
 
@@ -85,7 +88,8 @@ def generate_a_robot(iterate, unit_number):
     if get_previous_weight_of_milk_in_tank(robot_number, unit_number) is None:
         weight_of_milk_difference = 0
     else:
-        weight_of_milk_difference = weight_of_milk_in_tank - get_previous_weight_of_milk_in_tank(robot_number, unit_number)
+        weight_of_milk_difference = weight_of_milk_in_tank - \
+            get_previous_weight_of_milk_in_tank(robot_number, unit_number)
 
     robot_type = get_robot_type()
     tank_temperature = get_tank_temperature()
@@ -130,34 +134,34 @@ def generate_a_robot(iterate, unit_number):
     }
 
     add_robot = ("INSERT INTO robots "
-                    "(unit_number,"
-                    "robot_number,"
-                    "robot_type,"
-                    "tank_temperature,"
-                    "external_temperature,"
-                    "weight_of_milk_in_tank,"
-                    "weight_of_milk_difference,"
-                    "ph_measure,"
-                    "k_measure,"
-                    "nacl_concentration,"
-                    "salmonella_bacterium_level,"
-                    "e_coli_bacterium_level,"
-                    "listeria_bacterium_level) "
-                    "VALUES ("
-                    "%(unit_number)s,"
-                    "%(robot_number)s,"
-                    "%(robot_type)s,"
-                    "%(tank_temperature)s,"
-                    "%(external_temperature)s,"
-                    "%(weight_of_milk_in_tank)s,"
-                    "%(weight_of_milk_difference)s,"
-                    "%(ph_measure)s,"
-                    "%(k_measure)s,"
-                    "%(nacl_concentration)s,"
-                    "%(salmonella_bacterium_level)s,"
-                    "%(e_coli_bacterium_level)s,"
-                    "%(listeria_bacterium_level)s"
-                    ")"
+                 "(unit_number,"
+                 "robot_number,"
+                 "robot_type,"
+                 "tank_temperature,"
+                 "external_temperature,"
+                 "weight_of_milk_in_tank,"
+                 "weight_of_milk_difference,"
+                 "ph_measure,"
+                 "k_measure,"
+                 "nacl_concentration,"
+                 "salmonella_bacterium_level,"
+                 "e_coli_bacterium_level,"
+                 "listeria_bacterium_level) "
+                 "VALUES ("
+                 "%(unit_number)s,"
+                 "%(robot_number)s,"
+                 "%(robot_type)s,"
+                 "%(tank_temperature)s,"
+                 "%(external_temperature)s,"
+                 "%(weight_of_milk_in_tank)s,"
+                 "%(weight_of_milk_difference)s,"
+                 "%(ph_measure)s,"
+                 "%(k_measure)s,"
+                 "%(nacl_concentration)s,"
+                 "%(salmonella_bacterium_level)s,"
+                 "%(e_coli_bacterium_level)s,"
+                 "%(listeria_bacterium_level)s"
+                 ")"
                  )
     cursor.execute(add_robot, data_robot)
     cnx.commit()
@@ -167,7 +171,8 @@ def generate_json(unit_data, i):
     # Generate uniq name :
 
     timestamp = time.time()
-    timestamp_to_string = datetime.utcfromtimestamp(timestamp).strftime('%Y-%m-%d %H-%M-%S')
+    timestamp_to_string = datetime.utcfromtimestamp(
+        timestamp).strftime('%Y-%m-%d %H-%M-%S')
 
     filename = str(i + 1) + "-" + timestamp_to_string + ".json"
 
@@ -185,9 +190,10 @@ def generate_a_unit(unit_number):
 def execute_generation():
     global data
     # for y in range(5):
-    #     generate_a_unit(y + 1)
-    #     generate_json(data, y)
-    #     data = {'robots': []}  # Must empty the data, otherwise each json concatenate with the previous Unit values
+    generate_a_unit(1)
+    generate_json(data, 1)
+    # Must empty the data, otherwise each json concatenate with the previous Unit values
+    data = {'robots': []}
     threading.Timer(60.0, execute_generation).start()
 
 
