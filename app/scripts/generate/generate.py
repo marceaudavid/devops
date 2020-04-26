@@ -1,5 +1,6 @@
 import json
 import random
+import threading
 import string
 import time
 import mysql.connector
@@ -164,7 +165,7 @@ def generate_json(unit_data, i):
 
     # Generate json file with a unit of 10 robots :
 
-    with open(filename, "w") as outfile:
+    with open("json/" + filename, "w") as outfile:
         json.dump(unit_data, outfile, indent=4)
 
 
@@ -173,11 +174,13 @@ def generate_a_unit(unit_number):
         generate_a_robot(i, unit_number)
 
 
-for y in range(5):
-    generate_a_unit(y + 1)
-    generate_json(data, y)
-    data = {'robots': []}  # Must empty the data, otherwise each json concatenate with the previous Unit values
+def execute_generation():
+    global data
+    for y in range(5):
+        generate_a_unit(y + 1)
+        generate_json(data, y)
+        data = {'robots': []}  # Must empty the data, otherwise each json concatenate with the previous Unit values
+    threading.Timer(15.0, execute_generation).start()
 
 
-cursor.close()
-cnx.close()
+execute_generation()
