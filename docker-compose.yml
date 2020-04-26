@@ -1,17 +1,30 @@
-version: "3"
+version: '3'
 services:
+  db:
+    container_name: mariadb
+    build: ./app/database
+    restart: always
+    ports:
+      - '3306:3306'
   api:
     container_name: api
-    build: ./api
-  server:
-    container_name: server
-    build: ./server
-  database:
-    container_name: database
-    build: ./database
-  generate:
-    container_name: generate
-    build: ./scripts/generate
-  collect:
-    container_name: collect
-    build: ./scripts/collect
+    build: ./app/api
+    restart: always
+    depends_on:
+      - db
+    environment:
+      MYSQL_DATABASE: database
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+      MYSQL_HOST: mariadb
+    ports:
+      - '3000:3000'
+  # server:
+  #   container_name: server
+  #   build: ./server
+  # generate:
+  #   container_name: generate
+  #   build: ./scripts/generate
+  # collect:
+  #   container_name: collect
+  #   build: ./scripts/collect
