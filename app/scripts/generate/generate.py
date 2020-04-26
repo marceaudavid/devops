@@ -7,6 +7,7 @@ from datetime import datetime
 
 default_unit_number = 1  # replace this with database value to swap to unit 2, 3... and implement change every 10 robot
 
+
 cnx = mysql.connector.connect(user='root', password='root',
                               host='127.0.0.1',
                               database='devops')
@@ -14,13 +15,13 @@ cnx = mysql.connector.connect(user='root', password='root',
 cursor = cnx.cursor()
 
 
-def get_unit_number(number):
-    if number <= 10:
-        number = 1
-        return number
-    else:
-        number += 1
-        return number
+# def get_unit_number(number):
+#     if number <= 10:
+#         number = 1
+#         return number
+#     else:
+#         number += 1
+#         return number
 
 
 def get_robot_type():
@@ -66,7 +67,7 @@ def get_listeria_bacterium_level():
 data = {'robots': []}
 
 
-def generate_a_robot(iterate):
+def generate_a_robot(iterate, unit_number):
     weight_of_milk_in_tank = get_weight_of_milk_in_tank()
 
     if iterate == 0:
@@ -75,7 +76,7 @@ def generate_a_robot(iterate):
         # Faire un select :récupérer weight_of_milk_in_tank du robot précédent et remplacer -1 par cette value
         weight_of_milk_difference = weight_of_milk_in_tank - 1
 
-    unit_number = get_unit_number(default_unit_number)
+    unit_number = unit_number
     robot_number = iterate + 1
     robot_type = get_robot_type()
     tank_temperature = get_tank_temperature()
@@ -153,13 +154,13 @@ def generate_a_robot(iterate):
     cnx.commit()
 
 
-def generate_json(unit_data):
+def generate_json(unit_data, i):
     # Generate uniq name :
 
     timestamp = time.time()
     timestamp_to_string = datetime.utcfromtimestamp(timestamp).strftime('%Y-%m-%d %H-%M-%S')
 
-    filename = str(get_unit_number(default_unit_number)) + "-" + timestamp_to_string + ".json"
+    filename = str(i + 1) + "-" + timestamp_to_string + ".json"
 
     # Generate json file with a unit of 10 robots :
 
@@ -167,12 +168,16 @@ def generate_json(unit_data):
         json.dump(unit_data, outfile, indent=4)
 
 
-def generate_a_unit():
+def generate_a_unit(unit_number):
     for i in range(10):
-        generate_a_robot(i)
+        generate_a_robot(i, unit_number)
 
 
-generate_a_unit()
-generate_json(data)
+for y in range(5):
+    generate_a_unit(y + 1)
+    generate_json(data, y)
+    data = {'robots': []}  # Must empty the data, otherwise each json concatenate with the previous Unit values
+
+
 cursor.close()
 cnx.close()
