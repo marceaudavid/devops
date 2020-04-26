@@ -15,7 +15,7 @@
 
       <div class="button-col">
         <div class="row">
-          <a class="button-get" @click="getFavoriot()">
+          <a class="button-get" @click="get()">
             <img src="../assets/cloud-download-outline.svg" alt="cloud-download" />
           </a>
         </div>
@@ -113,6 +113,29 @@ export default {
       ],
       MesurePH: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
       MesureK: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+      ConcentrationNaCi: [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
       NiveauSalmonelle: [
         7,
         7,
@@ -209,7 +232,7 @@ export default {
   },
   mounted() {
     this.fillData();
-    this.getFavoriot();
+    this.get();
   },
   methods: {
     fillData() {
@@ -271,6 +294,15 @@ export default {
             data: this.MesureK
           },
           {
+            label: "Concentration NaCi",
+            backgroundColor: "rgb(165, 42, 42, 0.2)",
+            borderColor: "Brown",
+            pointBackgroundColor: "Brown",
+            borderWidth: 1,
+            pointBorderColor: "Brown",
+            data: this.ConcentrationNaCi
+          },
+          {
             label: "Niveau de salmonelle (ppm)",
             backgroundColor: "rgb(255,215,0, 0.2)",
             borderColor: "Gold",
@@ -300,8 +332,8 @@ export default {
         ]
       };
     },
-    // get favoriot
-    getFavoriot() {
+    // get
+    get() {
       var url = "localhost:3000/robot";
       var headers = {
         headers: {
@@ -312,32 +344,62 @@ export default {
         .get(url, headers)
         .then(x => {
           console.log(x);
-          // var results = x.data.results;
-          // var temp = [];
-          // var hum = [];
-          // var pot = [];
-          // var time = [];
-          // for (var i = 20; i >= 0; i--) {
-          //   var t = parseInt(results[i].data.Temperature);
-          //   var h = parseInt(results[i].data.Humidity);
-          //   var p = parseInt(results[i].data.Potentio);
-          //   var ti = results[i].stream_created_at.split("T");
+          var results = x.data.results;
+          var temperatureCuve = [];
+          var temperatureExterieur = [];
+          var poidLait = [];
+          var poidProduitFini = [];
+          var MesurePH = [];
+          var MesureK = [];
+          var ConcentrationNaCi = [];
+          var NiveauSalmonelle = [];
+          var NiveauEColis = [];
+          var NiveauBactérienListeria = [];
+          var time = [];
+          for (var i = 20; i >= 0; i--) {
+            var tc = parseInt(results[i].data.temperatureCuve);
+            var te = parseInt(results[i].data.temperatureExterieur);
+            var pl = parseInt(results[i].data.poidLait);
+            var pdf = parseInt(results[i].data.poidProduitFini);
+            var mp = parseInt(results[i].data.MesurePH);
+            var mk = parseInt(results[i].data.MesureK);
+            var cn = parseInt(results[i].data.ConcentrationNaCi);
+            var ns = parseInt(results[i].data.NiveauSalmonelle);
+            var nec = parseInt(results[i].data.NiveauEColis);
+            var nbl = parseInt(results[i].data.NiveauBactérienListeria);
 
-          //   temp.push(t);
-          //   hum.push(h);
-          //   pot.push(p);
-          //   time.push(ti);
-          // }
+            var ti = results[i].stream_created_at.split("T");
+            temperatureCuve.push(tc);
+            temperatureExterieur.push(te);
+            poidLait.push(pl);
+            poidProduitFini.push(pdf);
+            MesurePH.push(mp);
+            MesureK.push(mk);
+            ConcentrationNaCi.push(cn);
+            NiveauSalmonelle.push(ns);
+            NiveauEColis.push(nec);
+            NiveauBactérienListeria.push(nbl);
+
+            time.push(ti);
+          }
           // console.log(results)
           // console.log(temp)
           // console.log(hum)
           // console.log(pot)
-          // this.temperature = temp;
-          // this.humidity = hum;
-          // this.potentio = pot;
-          // this.time = time;
-          // this.loaded = true;
-          // this.fillData();
+          this.temperatureCuve = temperatureCuve;
+          this.temperatureExterieur = temperatureExterieur;
+          this.poidLait = poidLait;
+          this.poidProduitFini = poidProduitFini;
+          this.MesurePH = MesurePH;
+          this.MesureK = MesureK;
+          this.ConcentrationNaCi = ConcentrationNaCi;
+          this.NiveauSalmonelle = NiveauSalmonelle;
+          this.NiveauEColis = NiveauEColis;
+          this.NiveauBactérienListeria = NiveauBactérienListeria;
+
+          this.time = time;
+          this.loaded = true;
+          this.fillData();
         })
         .catch(() => {
           alert("Failed to get the data 😭");
