@@ -4,9 +4,6 @@
     <div class="container">
       <NavBarLeft />
       <div class="container-graph">
-        <div class="title-graph">
-          <h1>graph 1</h1>
-        </div>
         <Graph />
       </div>
     </div>
@@ -23,8 +20,8 @@ export default {
   components: {
     NavBarLeft,
     NavBarTop,
-    Graph,
-  },
+    Graph
+  }
 };
 </script>
 

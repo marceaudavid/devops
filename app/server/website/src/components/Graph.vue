@@ -2,57 +2,21 @@
   <div class="area">
     <form name="Form">
       <div class="input-field">
-        <label for="temp">Temperature...</label>
-        <input
-          id="temp"
-          name="temp"
-          type="number"
-          class="validate"
-          placeholder="Temperature..."
-          ref="temp"
-          min="0"
-          max="1000"
-          required
-        />
-      </div>
-
-      <div class="input-field">
-        <label for="hum">Humidity...</label>
-        <input
-          id="hum"
-          name="hum"
-          type="number"
-          class="validate"
-          placeholder="Humidity..."
-          ref="hum"
-          min="0"
-          max="1000"
-          required
-        />
-      </div>
-
-      <div class="input-field">
-        <label for="pot">Potentio...</label>
-        <input
-          id="pot"
-          name="pot"
-          type="number"
-          class="validate"
-          placeholder="Potentio..."
-          ref="pot"
-          min="0"
-          max="1000"
-          required
-        />
+        <label for="unit">Unité...</label>
+        <div class="formfield-select--container">
+          <select id="unit" name="unit" class="unit">
+            <option value="unit1">Unité1</option>
+            <option value="unit2">Unité2</option>
+            <option value="unit3">Unité3</option>
+            <option value="unit4">Unité4</option>
+          </select>
+        </div>
       </div>
 
       <div class="button-col">
         <div class="row">
           <a class="button-get" @click="getFavoriot()">
             <img src="../assets/cloud-download-outline.svg" alt="cloud-download" />
-          </a>
-          <a class="button-post" @click="postFavoriot()">
-            <img src="../assets/cloud-upload-outline.svg" alt="cloud-upload" />
           </a>
         </div>
       </div>
@@ -185,19 +149,9 @@ export default {
           Potentio: this.$refs.pot.value
         }
       };
-      var checkTemp = document.Form.temp.value;
-      var checkHum = document.Form.hum.value;
-      var checkPot = document.Form.pot.value;
+      var checkUnit = document.Form.unit.value;
 
-      if (checkTemp == "") {
-        alert("Please complete the entire form");
-        return false;
-      }
-      if (checkHum == "") {
-        alert("Please complete the entire form");
-        return false;
-      }
-      if (checkPot == "") {
+      if (checkUnit == "") {
         alert("Please complete the entire form");
         return false;
       } else {
@@ -222,33 +176,88 @@ export default {
   width: 600px;
   height: 200px;
   margin: auto;
+  margin-top: 2rem;
 }
 form {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 2rem;
 }
 .input-field {
-  width: 20%;
+  width: 35%;
+  margin-right: 2rem;
+  position: relative;
 }
-.validate {
+.formfield-select--container {
+  position: relative;
+
+  background-color: #fff;
+  border-bottom: 1px #000 solid;
+
+  overflow: hidden;
+  /* 
+		Le select natif pourra 
+		dépasser sans être vu 
+	*/
+}
+.formfield-select--container select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 110%;
+  /* 
+		On est sûr de ne plus voir
+		la flèche native 
+	*/
+
+  height: auto;
+  border: 0;
+  margin: 0;
+  padding: 0.75em;
+  border-radius: 0;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* 
+		On empêche le texte d'aller
+		jusqu'au bout s'il est trop long
+	*/
+}
+.formfield-select--container::after {
+  /* Le pointeur du select */
+  content: "";
+  position: absolute;
+  top: 50%;
+  margin-top: -3px;
+  right: 0.75em;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-top-color: #444;
+  border-width: 6px;
+  border-style: solid;
+  pointer-events: none;
+}
+.unit {
   width: 100%;
   height: 2rem;
   border: none;
   border-bottom: 1px black solid;
-  -webkit-appearance: none;
+  /* -webkit-appearance: none; */
   margin: 0;
-  -moz-appearance: textfield;
+  /* -moz-appearance: textfield; */
 }
-.validate:focus {
+.unit:focus {
   border-bottom: 2px #248b85 solid;
-  -webkit-appearance: none;
+  /* -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
+  appearance: none; */
   margin: 0;
 }
 .button-col {
-  width: 25%;
+  width: 10%;
 }
 .row {
   width: 100%;
@@ -258,16 +267,7 @@ form {
 .button-get {
   display: inline-flex;
   background-color: #4eb4a8;
-  width: 50%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-}
-.button-post {
-  display: inline-flex;
-  background-color: #f06593;
-  width: 50%;
+  width: 100%;
   height: 100%;
   justify-content: center;
   align-items: center;
