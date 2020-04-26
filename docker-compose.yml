@@ -24,9 +24,13 @@ services:
       - db
     env_file:
       - .env
-  # server:
-  #   container_name: server
-  #   build: ./server
+  web:
+    container_name: web
+    build: ./app/web
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
   # collect:
   #   container_name: collect
   #   build: ./scripts/collect
