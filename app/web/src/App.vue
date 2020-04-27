@@ -6,6 +6,9 @@
       <div class="container-graph">
         <Graph />
       </div>
+      <div class="container-eportButton">
+        <ExportButton />
+      </div>
     </div>
   </div>
 </template>
@@ -14,13 +17,15 @@
 import NavBarLeft from "./components/NavBarLeft.vue";
 import NavBarTop from "./components/NavBarTop.vue";
 import Graph from "./components/Graph.vue";
+import ExportButton from "./components/ExportButton.vue";
 
 export default {
   name: "App",
   components: {
     NavBarLeft,
     NavBarTop,
-    Graph
+    Graph,
+    ExportButton
   }
 };
 </script>
@@ -42,13 +47,11 @@ export default {
   height: 93vh;
 }
 .container-graph {
-  width: 85%;
+  width: 75%;
   height: 100%;
 }
-.title-graph {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+.container-eportButton {
+  width: 10%;
+  height: 100%;
 }
 </style>

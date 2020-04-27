@@ -2,7 +2,7 @@
   <div class="container-navBarLeft">
     <div class="filter">
       <div class="graph">
-        <h2>le graph</h2>
+        <h2>le graph 1</h2>
       </div>
     </div>
   </div>
@@ -13,8 +13,8 @@ export default {
   name: "NavBarLeft",
   components: {},
   props: {
-    msg: String,
-  },
+    msg: String
+  }
 };
 </script>
 

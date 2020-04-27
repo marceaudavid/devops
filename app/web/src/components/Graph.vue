@@ -1,14 +1,15 @@
 <template>
-  <div class="area">
+  <div id="PDF" class="area">
     <form name="Form">
       <div class="input-field">
         <label for="unit">Unité...</label>
         <div class="formfield-select--container">
           <select id="unit" name="unit" class="unit">
-            <option value="unit1">Unité1</option>
-            <option value="unit2">Unité2</option>
-            <option value="unit3">Unité3</option>
-            <option value="unit4">Unité4</option>
+            <option value="unit1">Unité 1</option>
+            <option value="unit2">Unité 2</option>
+            <option value="unit3">Unité 3</option>
+            <option value="unit4">Unité 4</option>
+            <option value="unit4">Unité 5</option>
           </select>
         </div>
       </div>
@@ -16,10 +17,7 @@
       <div class="button-col">
         <div class="row">
           <a class="button-get" @click="get()">
-            <img
-              src="../assets/cloud-download-outline.svg"
-              alt="cloud-download"
-            />
+            <img src="../assets/cloud-download-outline.svg" alt="cloud-download" />
           </a>
         </div>
       </div>
@@ -35,10 +33,10 @@ import axios from "axios";
 export default {
   name: "Graph",
   props: {
-    msg: String,
+    msg: String
   },
   components: {
-    LineChart,
+    LineChart
   },
   data() {
     return {
@@ -65,7 +63,7 @@ export default {
         1,
         1,
         1,
-        1,
+        1
       ],
       temperatureExterieur: [
         2,
@@ -88,7 +86,7 @@ export default {
         2,
         2,
         2,
-        2,
+        2
       ],
       poidLait: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
       poidProduitFini: [
@@ -112,7 +110,7 @@ export default {
         4,
         4,
         4,
-        4,
+        4
       ],
       MesurePH: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
       MesureK: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
@@ -137,7 +135,7 @@ export default {
         10,
         10,
         10,
-        10,
+        10
       ],
       NiveauSalmonelle: [
         7,
@@ -160,7 +158,7 @@ export default {
         7,
         7,
         7,
-        7,
+        7
       ],
       NiveauEColis: [
         8,
@@ -183,7 +181,7 @@ export default {
         8,
         8,
         8,
-        8,
+        8
       ],
       NiveauBactérienListeria: [
         9,
@@ -206,7 +204,7 @@ export default {
         9,
         9,
         9,
-        9,
+        9
       ],
       time: [
         0,
@@ -229,8 +227,8 @@ export default {
         17,
         18,
         19,
-        20,
-      ],
+        20
+      ]
     };
   },
   mounted() {
@@ -249,7 +247,7 @@ export default {
             pointBackgroundColor: "red",
             borderWidth: 1,
             pointBorderColor: "red",
-            data: this.temperatureCuve,
+            data: this.temperatureCuve
           },
           {
             label: "Température extérieur (°C)",
@@ -258,7 +256,7 @@ export default {
             pointBackgroundColor: "blue",
             borderWidth: 1,
             pointBorderColor: "blue",
-            data: this.temperatureExterieur,
+            data: this.temperatureExterieur
           },
           {
             label: "Poid du lait (Kg)",
@@ -267,7 +265,7 @@ export default {
             pointBackgroundColor: "orange",
             borderWidth: 1,
             pointBorderColor: "orange",
-            data: this.poidLait,
+            data: this.poidLait
           },
           {
             label: "Poid du produit fini (Kg)",
@@ -276,7 +274,7 @@ export default {
             pointBackgroundColor: "BlueViolet",
             borderWidth: 1,
             pointBorderColor: "BlueViolet",
-            data: this.poidProduitFini,
+            data: this.poidProduitFini
           },
           {
             label: "Mesure du PH",
@@ -285,7 +283,7 @@ export default {
             pointBackgroundColor: "Cyan",
             borderWidth: 1,
             pointBorderColor: "Cyan",
-            data: this.MesurePH,
+            data: this.MesurePH
           },
           {
             label: "Mesure K+ (mg/L)",
@@ -294,7 +292,7 @@ export default {
             pointBackgroundColor: "DarkGray",
             borderWidth: 1,
             pointBorderColor: "DarkGray",
-            data: this.MesureK,
+            data: this.MesureK
           },
           {
             label: "Concentration NaCi",
@@ -303,7 +301,7 @@ export default {
             pointBackgroundColor: "Brown",
             borderWidth: 1,
             pointBorderColor: "Brown",
-            data: this.ConcentrationNaCi,
+            data: this.ConcentrationNaCi
           },
           {
             label: "Niveau de salmonelle (ppm)",
@@ -312,7 +310,7 @@ export default {
             pointBackgroundColor: "Gold",
             borderWidth: 1,
             pointBorderColor: "Gold",
-            data: this.NiveauSalmonelle,
+            data: this.NiveauSalmonelle
           },
           {
             label: "Niveau E-coli (ppm)",
@@ -321,7 +319,7 @@ export default {
             pointBackgroundColor: "LemonChiffon",
             borderWidth: 1,
             pointBorderColor: "LemonChiffon",
-            data: this.NiveauEColis,
+            data: this.NiveauEColis
           },
           {
             label: "Niveau bactérien listeria (ppm)",
@@ -330,9 +328,9 @@ export default {
             pointBackgroundColor: "Purple",
             borderWidth: 1,
             pointBorderColor: "Purple",
-            data: this.NiveauBactérienListeria,
-          },
-        ],
+            data: this.NiveauBactérienListeria
+          }
+        ]
       };
     },
     // get
@@ -340,12 +338,12 @@ export default {
       var url = "http://localhost:3000/robot";
       var headers = {
         headers: {
-          "Content-Type": "application/json",
-        },
+          "Content-Type": "application/json"
+        }
       };
       axios
         .get(url, headers)
-        .then((x) => {
+        .then(x => {
           var results = x.data;
 
           var temperatureCuve = [];
@@ -403,13 +401,13 @@ export default {
           this.loaded = true;
           this.fillData();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
 
           alert("Failed to get the data 😭");
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
