@@ -1,5 +1,5 @@
 <template>
-  <div id="PDF" class="area">
+  <div class="area">
     <form name="Form">
       <div class="input-field">
         <label for="unit">Unité...</label>
@@ -32,7 +32,7 @@
         </div>
       </div>
     </form>
-    <line-chart :chart-data="datacollection"></line-chart>
+    <line-chart id="pdf" :chart-data="datacollection"></line-chart>
     <div class="row-button">
       <a class="exportButton" @click="exportButton()">
         <img
@@ -427,7 +427,7 @@ export default {
     },
     exportButton() {
       // Default export is a4 paper, portrait, using millimeters for units
-      var element = document.getElementById("PDF");
+      var element = document.getElementById("pdf");
       html2pdf(element);
     },
   },
@@ -544,19 +544,21 @@ form {
   height: 50%;
 }
 .row-button {
-  display: inline-flex;
-  background-color: #4eb4a8;
+  display: flex;
   width: 100%;
-  height: 7%;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 2rem;
+  margin: 2rem 10px 10px 10px;
 }
 .exportButton {
-  width: 50%;
-  height: 50%;
+  width: 100px;
+  border-radius: 5px;
+  background-color: #4eb4a8;
+  height: 50px;
+  border-radius: 5px;
+  padding: 10px;
 }
 .download-upload {
   width: 100%;
