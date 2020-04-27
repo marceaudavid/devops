@@ -415,7 +415,7 @@ export default {
           this.NiveauEColis = NiveauEColis;
           this.NiveauBactérienListeria = NiveauBactérienListeria;
 
-          // this.time = time;
+          this.time = time;
           this.loaded = true;
           this.fillData();
         })
