@@ -22,7 +22,6 @@ export default {
 <style scoped>
 .container-navBarLeft {
   width: 15%;
-  height: 100%;
 }
 .filter {
   background-color: #293d56;

@@ -1,5 +1,5 @@
 <template>
-  <div id="pdf" class="area">
+  <div id="pdf2" class="area">
     <form name="Form">
       <div class="input-field">
         <label for="unit">Unité...</label>
@@ -251,96 +251,96 @@ export default {
       this.datacollection = {
         labels: this.time,
         datasets: [
+          //   {
+          //     label: "Température de la cuve (°C)",
+          //     backgroundColor: "rgba(255, 0, 0, 0.2)",
+          //     borderColor: "lightpink",
+          //     pointBackgroundColor: "red",
+          //     borderWidth: 1,
+          //     pointBorderColor: "red",
+          //     data: this.temperatureCuve
+          //   },
+          //   {
+          //     label: "Température extérieur (°C)",
+          //     backgroundColor: "rgba(0, 0, 255, 0.2)",
+          //     borderColor: "lightblue",
+          //     pointBackgroundColor: "blue",
+          //     borderWidth: 1,
+          //     pointBorderColor: "blue",
+          //     data: this.temperatureExterieur
+          //   },
           {
-            label: "Température de la cuve (°C)",
-            backgroundColor: "rgba(255, 0, 0, 0.2)",
-            borderColor: "lightpink",
-            pointBackgroundColor: "red",
+            label: "Poid du lait (Kg)",
+            backgroundColor: "rgba(255, 255, 0, 0.2)",
+            borderColor: "orange",
+            pointBackgroundColor: "orange",
             borderWidth: 1,
-            pointBorderColor: "red",
-            data: this.temperatureCuve
+            pointBorderColor: "orange",
+            data: this.poidLait
           },
           {
-            label: "Température extérieur (°C)",
-            backgroundColor: "rgba(0, 0, 255, 0.2)",
-            borderColor: "lightblue",
-            pointBackgroundColor: "blue",
-            borderWidth: 1,
-            pointBorderColor: "blue",
-            data: this.temperatureExterieur
-          },
-          // {
-          //   label: "Poid du lait (Kg)",
-          //   backgroundColor: "rgba(255, 255, 0, 0.2)",
-          //   borderColor: "orange",
-          //   pointBackgroundColor: "orange",
-          //   borderWidth: 1,
-          //   pointBorderColor: "orange",
-          //   data: this.poidLait,
-          // },
-          // {
-          //   label: "Poid du produit fini (Kg)",
-          //   backgroundColor: "rgb(138, 43, 226, 0.2)",
-          //   borderColor: "BlueViolet",
-          //   pointBackgroundColor: "BlueViolet",
-          //   borderWidth: 1,
-          //   pointBorderColor: "BlueViolet",
-          //   data: this.poidProduitFini,
-          // },
-          {
-            label: "Mesure du PH",
-            backgroundColor: "rgb(0, 255, 255, 0.2)",
-            borderColor: "Cyan",
-            pointBackgroundColor: "Cyan",
-            borderWidth: 1,
-            pointBorderColor: "Cyan",
-            data: this.MesurePH
-          },
-          {
-            label: "Mesure K+ (mg/L)",
-            backgroundColor: "rgb(169,169,169, 0.2)",
-            borderColor: "DarkGray",
-            pointBackgroundColor: "DarkGray",
-            borderWidth: 1,
-            pointBorderColor: "DarkGray",
-            data: this.MesureK
-          },
-          {
-            label: "Concentration NaCi",
-            backgroundColor: "rgb(165, 42, 42, 0.2)",
-            borderColor: "Brown",
-            pointBackgroundColor: "Brown",
-            borderWidth: 1,
-            pointBorderColor: "Brown",
-            data: this.ConcentrationNaCi
-          },
-          {
-            label: "Niveau de salmonelle (ppm)",
-            backgroundColor: "rgb(255,215,0, 0.2)",
-            borderColor: "Gold",
-            pointBackgroundColor: "Gold",
-            borderWidth: 1,
-            pointBorderColor: "Gold",
-            data: this.NiveauSalmonelle
-          },
-          {
-            label: "Niveau E-coli (ppm)",
-            backgroundColor: "rgb(95, 95, 95, 0.2)",
-            borderColor: " #5f5f5f",
-            pointBackgroundColor: " #5f5f5f",
-            borderWidth: 1,
-            pointBorderColor: " #5f5f5f",
-            data: this.NiveauEColis
-          },
-          {
-            label: "Niveau bactérien listeria (ppm)",
+            label: "Poid du produit fini (Kg)",
             backgroundColor: "rgb(138, 43, 226, 0.2)",
-            borderColor: "Purple",
-            pointBackgroundColor: "Purple",
+            borderColor: "BlueViolet",
+            pointBackgroundColor: "BlueViolet",
             borderWidth: 1,
-            pointBorderColor: "Purple",
-            data: this.NiveauBactérienListeria
+            pointBorderColor: "BlueViolet",
+            data: this.poidProduitFini
           }
+          //   {
+          //     label: "Mesure du PH",
+          //     backgroundColor: "rgb(0, 255, 255, 0.2)",
+          //     borderColor: "Cyan",
+          //     pointBackgroundColor: "Cyan",
+          //     borderWidth: 1,
+          //     pointBorderColor: "Cyan",
+          //     data: this.MesurePH
+          //   },
+          //   {
+          //     label: "Mesure K+ (mg/L)",
+          //     backgroundColor: "rgb(169,169,169, 0.2)",
+          //     borderColor: "DarkGray",
+          //     pointBackgroundColor: "DarkGray",
+          //     borderWidth: 1,
+          //     pointBorderColor: "DarkGray",
+          //     data: this.MesureK
+          //   },
+          //   {
+          //     label: "Concentration NaCi",
+          //     backgroundColor: "rgb(165, 42, 42, 0.2)",
+          //     borderColor: "Brown",
+          //     pointBackgroundColor: "Brown",
+          //     borderWidth: 1,
+          //     pointBorderColor: "Brown",
+          //     data: this.ConcentrationNaCi
+          //   },
+          //   {
+          //     label: "Niveau de salmonelle (ppm)",
+          //     backgroundColor: "rgb(255,215,0, 0.2)",
+          //     borderColor: "Gold",
+          //     pointBackgroundColor: "Gold",
+          //     borderWidth: 1,
+          //     pointBorderColor: "Gold",
+          //     data: this.NiveauSalmonelle
+          //   },
+          //   {
+          //     label: "Niveau E-coli (ppm)",
+          //     backgroundColor: "rgb(95, 95, 95, 0.2)",
+          //     borderColor: " #5f5f5f",
+          //     pointBackgroundColor: " #5f5f5f",
+          //     borderWidth: 1,
+          //     pointBorderColor: " #5f5f5f",
+          //     data: this.NiveauEColis
+          //   },
+          //   {
+          //     label: "Niveau bactérien listeria (ppm)",
+          //     backgroundColor: "rgb(138, 43, 226, 0.2)",
+          //     borderColor: "Purple",
+          //     pointBackgroundColor: "Purple",
+          //     borderWidth: 1,
+          //     pointBorderColor: "Purple",
+          //     data: this.NiveauBactérienListeria
+          //   }
         ]
       };
     },
@@ -417,7 +417,7 @@ export default {
     },
     exportButton() {
       // Default export is a4 paper, portrait, using millimeters for units
-      var element = document.getElementById("pdf");
+      var element = document.getElementById("pdf2");
       var opt = {
         filename: "graphics-generator-pdf.pdf",
         image: { type: "pdf", quality: 0.98 },

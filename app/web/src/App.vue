@@ -5,6 +5,7 @@
       <NavBarLeft />
       <div class="container-graph">
         <Graph />
+        <GraphRobot1 />
       </div>
     </div>
   </div>
@@ -14,6 +15,7 @@
 import NavBarLeft from "./components/NavBarLeft.vue";
 import NavBarTop from "./components/NavBarTop.vue";
 import Graph from "./components/Graph.vue";
+import GraphRobot1 from "./components/GraphRobot1.vue";
 
 export default {
   name: "App",
@@ -21,7 +23,8 @@ export default {
     NavBarLeft,
     NavBarTop,
     Graph,
-  },
+    GraphRobot1
+  }
 };
 </script>
 
@@ -39,10 +42,8 @@ export default {
 .container {
   display: flex;
   width: 100%;
-  height: 93vh;
 }
 .container-graph {
-  width: 75%;
-  height: 100%;
+  width: 85%;
 }
 </style>
