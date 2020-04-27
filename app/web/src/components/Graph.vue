@@ -22,7 +22,7 @@
 
       <div class="button-col">
         <div class="row">
-          <a class="button-get" @click="get()">
+          <a class="button-get" @click="getData()">
             <img
               class="cloud-download"
               src="../assets/cloud-download-outline.svg"
@@ -391,7 +391,6 @@ export default {
             var nbl = parseInt(results[i].listeria_bacterium_level);
 
             var ti = results[i].creation_time.split("T");
-            console.log(mk);
             temperatureCuve.push(tc);
             temperatureExterieur.push(te);
             poidLait.push(pl);
@@ -405,8 +404,6 @@ export default {
 
             time.push(ti);
           }
-          console.log(mk);
-
           this.temperatureCuve = temperatureCuve;
           this.temperatureExterieur = temperatureExterieur;
           this.poidLait = poidLait;
