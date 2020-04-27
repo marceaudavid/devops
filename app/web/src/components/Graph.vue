@@ -16,7 +16,7 @@
 
       <div class="button-col">
         <div class="row">
-          <a class="button-get" @click="get()">
+          <a class="button-get" @click="getData()">
             <img
               class="cloud-download"
               src="../assets/cloud-download-outline.svg"
@@ -269,24 +269,24 @@ export default {
             pointBorderColor: "blue",
             data: this.temperatureExterieur
           },
-          {
-            label: "Poid du lait (Kg)",
-            backgroundColor: "rgba(255, 255, 0, 0.2)",
-            borderColor: "orange",
-            pointBackgroundColor: "orange",
-            borderWidth: 1,
-            pointBorderColor: "orange",
-            data: this.poidLait
-          },
-          {
-            label: "Poid du produit fini (Kg)",
-            backgroundColor: "rgb(138, 43, 226, 0.2)",
-            borderColor: "BlueViolet",
-            pointBackgroundColor: "BlueViolet",
-            borderWidth: 1,
-            pointBorderColor: "BlueViolet",
-            data: this.poidProduitFini
-          },
+          // {
+          //   label: "Poid du lait (Kg)",
+          //   backgroundColor: "rgba(255, 255, 0, 0.2)",
+          //   borderColor: "orange",
+          //   pointBackgroundColor: "orange",
+          //   borderWidth: 1,
+          //   pointBorderColor: "orange",
+          //   data: this.poidLait,
+          // },
+          // {
+          //   label: "Poid du produit fini (Kg)",
+          //   backgroundColor: "rgb(138, 43, 226, 0.2)",
+          //   borderColor: "BlueViolet",
+          //   pointBackgroundColor: "BlueViolet",
+          //   borderWidth: 1,
+          //   pointBorderColor: "BlueViolet",
+          //   data: this.poidProduitFini,
+          // },
           {
             label: "Mesure du PH",
             backgroundColor: "rgb(0, 255, 255, 0.2)",
@@ -325,11 +325,11 @@ export default {
           },
           {
             label: "Niveau E-coli (ppm)",
-            backgroundColor: "rgb(255,250,205, 0.2)",
-            borderColor: "LemonChiffon",
-            pointBackgroundColor: "LemonChiffon",
+            backgroundColor: "rgb(95, 95, 95, 0.2)",
+            borderColor: " #5f5f5f",
+            pointBackgroundColor: " #5f5f5f",
             borderWidth: 1,
-            pointBorderColor: "LemonChiffon",
+            pointBorderColor: " #5f5f5f",
             data: this.NiveauEColis
           },
           {
@@ -380,7 +380,7 @@ export default {
             var nec = parseInt(results[i].e_coli_bacterium_level);
             var nbl = parseInt(results[i].listeria_bacterium_level);
 
-            var ti = results[i].creation_time;
+            var ti = results[i].creation_time.split("T");
             temperatureCuve.push(tc);
             temperatureExterieur.push(te);
             poidLait.push(pl);
@@ -394,8 +394,6 @@ export default {
 
             time.push(ti);
           }
-          console.log(mk);
-
           this.temperatureCuve = temperatureCuve;
           this.temperatureExterieur = temperatureExterieur;
           this.poidLait = poidLait;
@@ -407,7 +405,7 @@ export default {
           this.NiveauEColis = NiveauEColis;
           this.NiveauBactérienListeria = NiveauBactérienListeria;
 
-          // this.time = time;
+          this.time = time;
           this.loaded = true;
           this.fillData();
         })
