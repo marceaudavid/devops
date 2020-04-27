@@ -16,7 +16,10 @@
       <div class="button-col">
         <div class="row">
           <a class="button-get" @click="get()">
-            <img src="../assets/cloud-download-outline.svg" alt="cloud-download" />
+            <img
+              src="../assets/cloud-download-outline.svg"
+              alt="cloud-download"
+            />
           </a>
         </div>
       </div>
@@ -32,10 +35,10 @@ import axios from "axios";
 export default {
   name: "Graph",
   props: {
-    msg: String
+    msg: String,
   },
   components: {
-    LineChart
+    LineChart,
   },
   data() {
     return {
@@ -62,7 +65,7 @@ export default {
         1,
         1,
         1,
-        1
+        1,
       ],
       temperatureExterieur: [
         2,
@@ -85,7 +88,7 @@ export default {
         2,
         2,
         2,
-        2
+        2,
       ],
       poidLait: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
       poidProduitFini: [
@@ -109,7 +112,7 @@ export default {
         4,
         4,
         4,
-        4
+        4,
       ],
       MesurePH: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
       MesureK: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
@@ -134,7 +137,7 @@ export default {
         10,
         10,
         10,
-        10
+        10,
       ],
       NiveauSalmonelle: [
         7,
@@ -157,7 +160,7 @@ export default {
         7,
         7,
         7,
-        7
+        7,
       ],
       NiveauEColis: [
         8,
@@ -180,7 +183,7 @@ export default {
         8,
         8,
         8,
-        8
+        8,
       ],
       NiveauBactérienListeria: [
         9,
@@ -203,7 +206,7 @@ export default {
         9,
         9,
         9,
-        9
+        9,
       ],
       time: [
         0,
@@ -226,8 +229,8 @@ export default {
         17,
         18,
         19,
-        20
-      ]
+        20,
+      ],
     };
   },
   mounted() {
@@ -246,7 +249,7 @@ export default {
             pointBackgroundColor: "red",
             borderWidth: 1,
             pointBorderColor: "red",
-            data: this.temperatureCuve
+            data: this.temperatureCuve,
           },
           {
             label: "Température extérieur (°C)",
@@ -255,7 +258,7 @@ export default {
             pointBackgroundColor: "blue",
             borderWidth: 1,
             pointBorderColor: "blue",
-            data: this.temperatureExterieur
+            data: this.temperatureExterieur,
           },
           {
             label: "Poid du lait (Kg)",
@@ -264,7 +267,7 @@ export default {
             pointBackgroundColor: "orange",
             borderWidth: 1,
             pointBorderColor: "orange",
-            data: this.poidLait
+            data: this.poidLait,
           },
           {
             label: "Poid du produit fini (Kg)",
@@ -273,7 +276,7 @@ export default {
             pointBackgroundColor: "BlueViolet",
             borderWidth: 1,
             pointBorderColor: "BlueViolet",
-            data: this.poidProduitFini
+            data: this.poidProduitFini,
           },
           {
             label: "Mesure du PH",
@@ -282,7 +285,7 @@ export default {
             pointBackgroundColor: "Cyan",
             borderWidth: 1,
             pointBorderColor: "Cyan",
-            data: this.MesurePH
+            data: this.MesurePH,
           },
           {
             label: "Mesure K+ (mg/L)",
@@ -291,7 +294,7 @@ export default {
             pointBackgroundColor: "DarkGray",
             borderWidth: 1,
             pointBorderColor: "DarkGray",
-            data: this.MesureK
+            data: this.MesureK,
           },
           {
             label: "Concentration NaCi",
@@ -300,7 +303,7 @@ export default {
             pointBackgroundColor: "Brown",
             borderWidth: 1,
             pointBorderColor: "Brown",
-            data: this.ConcentrationNaCi
+            data: this.ConcentrationNaCi,
           },
           {
             label: "Niveau de salmonelle (ppm)",
@@ -309,7 +312,7 @@ export default {
             pointBackgroundColor: "Gold",
             borderWidth: 1,
             pointBorderColor: "Gold",
-            data: this.NiveauSalmonelle
+            data: this.NiveauSalmonelle,
           },
           {
             label: "Niveau E-coli (ppm)",
@@ -318,7 +321,7 @@ export default {
             pointBackgroundColor: "LemonChiffon",
             borderWidth: 1,
             pointBorderColor: "LemonChiffon",
-            data: this.NiveauEColis
+            data: this.NiveauEColis,
           },
           {
             label: "Niveau bactérien listeria (ppm)",
@@ -327,24 +330,24 @@ export default {
             pointBackgroundColor: "Purple",
             borderWidth: 1,
             pointBorderColor: "Purple",
-            data: this.NiveauBactérienListeria
-          }
-        ]
+            data: this.NiveauBactérienListeria,
+          },
+        ],
       };
     },
     // get
     get() {
-      var url = "localhost:3000/robot";
+      var url = "http://localhost:3000/robot";
       var headers = {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       };
       axios
         .get(url, headers)
-        .then(x => {
-          console.log(x);
-          var results = x.data.results;
+        .then((x) => {
+          var results = x.data;
+
           var temperatureCuve = [];
           var temperatureExterieur = [];
           var poidLait = [];
@@ -357,18 +360,19 @@ export default {
           var NiveauBactérienListeria = [];
           var time = [];
           for (var i = 20; i >= 0; i--) {
-            var tc = parseInt(results[i].data.temperatureCuve);
-            var te = parseInt(results[i].data.temperatureExterieur);
-            var pl = parseInt(results[i].data.poidLait);
-            var pdf = parseInt(results[i].data.poidProduitFini);
-            var mp = parseInt(results[i].data.MesurePH);
-            var mk = parseInt(results[i].data.MesureK);
-            var cn = parseInt(results[i].data.ConcentrationNaCi);
-            var ns = parseInt(results[i].data.NiveauSalmonelle);
-            var nec = parseInt(results[i].data.NiveauEColis);
-            var nbl = parseInt(results[i].data.NiveauBactérienListeria);
+            var tc = parseInt(results[i].tank_temperature);
+            var te = parseInt(results[i].external_temperature);
+            var pl = parseInt(results[i].weight_of_milk_in_tank);
+            var pdf = parseInt(results[i].weight_of_milk_difference);
+            var mp = parseInt(results[i].ph_measure);
+            var mk = parseInt(results[i].k_measure);
+            var cn = parseInt(results[i].nacl_concentration);
+            var ns = parseInt(results[i].salmonella_bacterium_level);
+            var nec = parseInt(results[i].e_coli_bacterium_level);
+            var nbl = parseInt(results[i].listeria_bacterium_level);
 
-            var ti = results[i].stream_created_at.split("T");
+            var ti = results[i].creation_time.split("T");
+            console.log(mk);
             temperatureCuve.push(tc);
             temperatureExterieur.push(te);
             poidLait.push(pl);
@@ -382,10 +386,8 @@ export default {
 
             time.push(ti);
           }
-          // console.log(results)
-          // console.log(temp)
-          // console.log(hum)
-          // console.log(pot)
+          console.log(mk);
+
           this.temperatureCuve = temperatureCuve;
           this.temperatureExterieur = temperatureExterieur;
           this.poidLait = poidLait;
@@ -397,15 +399,15 @@ export default {
           this.NiveauEColis = NiveauEColis;
           this.NiveauBactérienListeria = NiveauBactérienListeria;
 
-          this.time = time;
+          // this.time = time;
           this.loaded = true;
           this.fillData();
         })
         .catch(() => {
           alert("Failed to get the data 😭");
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
