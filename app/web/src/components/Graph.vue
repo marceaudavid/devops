@@ -42,7 +42,7 @@
 <script>
 import LineChart from "./LineChart.js";
 import axios from "axios";
-import jsPDF from "jspdf";
+import html2pdf from "html2pdf.js";
 
 export default {
   name: "Graph",
@@ -423,13 +423,8 @@ export default {
     },
     exportButton() {
       // Default export is a4 paper, portrait, using millimeters for units
-      var doc = new jsPDF();
-      var source = window.document.getElementsByTagName("PDF")[0];
-      doc.fromHTML(source, 15, 15, {
-        width: 180,
-      });
-      doc.text("PDF GENERATOR GRAPH 1", 10, 10);
-      doc.save("graphics-generator-pdf.pdf");
+      var element = document.getElementById("PDF");
+      html2pdf(element);
     },
   },
 };
@@ -439,7 +434,7 @@ export default {
 <style scoped>
 .area {
   width: 600px;
-  height: 200px;
+  height: 89vh;
   margin: auto;
   margin-top: 2rem;
 }
@@ -548,7 +543,7 @@ form {
   display: inline-flex;
   background-color: #4eb4a8;
   width: 100%;
-  height: 30%;
+  height: 7%;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
