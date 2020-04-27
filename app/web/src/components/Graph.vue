@@ -403,7 +403,9 @@ export default {
           this.loaded = true;
           this.fillData();
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err);
+
           alert("Failed to get the data 😭");
         });
     },

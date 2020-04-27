@@ -17,5 +17,6 @@ CREATE TABLE robots (
     nacl_concentration INT NOT NULL,
     salmonella_bacterium_level INT NOT NULL,
     e_coli_bacterium_level INT NOT NULL,
-    listeria_bacterium_level INT NOT NULL
+    listeria_bacterium_level INT NOT NULL,
+    creation_time DATETIME NOT NULL
 );
