@@ -335,11 +335,11 @@ export default {
           },
           {
             label: "Niveau E-coli (ppm)",
-            backgroundColor: "rgb(255,250,205, 0.2)",
-            borderColor: "LemonChiffon",
-            pointBackgroundColor: "LemonChiffon",
+            backgroundColor: "rgb(95, 95, 95, 0.2)",
+            borderColor: " #5f5f5f",
+            pointBackgroundColor: " #5f5f5f",
             borderWidth: 1,
-            pointBorderColor: "LemonChiffon",
+            pointBorderColor: " #5f5f5f",
             data: this.NiveauEColis,
           },
           {
