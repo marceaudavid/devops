@@ -11,12 +11,12 @@ CREATE TABLE robots (
     tank_temperature INT NOT NULL,
     external_temperature INT NOT NULL,
     weight_of_milk_in_tank INT NOT NULL,
-    weight_of_milk_difference INT NOT NULL,
     ph_measure INT NOT NULL,
     k_measure INT NOT NULL,
     nacl_concentration INT NOT NULL,
     salmonella_bacterium_level INT NOT NULL,
     e_coli_bacterium_level INT NOT NULL,
     listeria_bacterium_level INT NOT NULL,
-    creation_time DATETIME NOT NULL
+    creation_time DATETIME NOT NULL,
+    insertion_time DATETIME DEFAULT CURRENT_TIMESTAMP
 );

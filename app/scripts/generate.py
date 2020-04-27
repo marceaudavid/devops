@@ -1,20 +1,30 @@
 import json
 import random
+import socket
 import threading
 import string
 import time
 import os
 import mysql.connector
 from datetime import datetime
+from dotenv import load_dotenv
 
 # replace this with database value to swap to unit 2, 3... and implement change every 10 robot
 default_unit_number = 1
 
+load_dotenv()
 
 cnx = mysql.connector.connect(user=os.environ['MYSQL_USER'], password=os.environ['MYSQL_PASSWORD'],
                               host=os.environ['MYSQL_HOST'], database=os.environ['MYSQL_DATABASE'])
 
 cursor = cnx.cursor(buffered=True)
+
+# Create a socket (SOCK_STREAM means a TCP socket)
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind((socket.gethostname(), 5000))
+server_socket.setblocking(False)
+server_socket.listen()
+conn, addr = server_socket.accept()
 
 
 def get_robot_type():
@@ -64,35 +74,10 @@ def get_time():
 data = {'robots': []}
 
 
-def get_previous_weight_of_milk_in_tank(robot_number, unit_number):
-
-    # Get the last value of the weight of milk in tank for the robot :
-
-    cursor.execute(
-        "SELECT weight_of_milk_in_tank FROM robots WHERE id IN (SELECT max(id) FROM robots WHERE robot_number = " + str(
-            robot_number) + " AND unit_number = " + str(unit_number) + ");")
-
-    records = cursor.fetchall()
-    for row in records:
-        result = row[0]
-        if result is None:
-            return 0
-        else:
-            return result
-
-
 def generate_a_robot(iterate, unit_number):
     weight_of_milk_in_tank = get_weight_of_milk_in_tank()
-
     robot_number = iterate + 1
     unit_number = unit_number
-
-    if get_previous_weight_of_milk_in_tank(robot_number, unit_number) is None:
-        weight_of_milk_difference = 0
-    else:
-        weight_of_milk_difference = weight_of_milk_in_tank - \
-            get_previous_weight_of_milk_in_tank(robot_number, unit_number)
-
     robot_type = get_robot_type()
     tank_temperature = get_tank_temperature()
     external_temperature = get_external_temperature()
@@ -111,7 +96,6 @@ def generate_a_robot(iterate, unit_number):
         "Tank temperature (Celsius)": tank_temperature,
         "External temperature (Celsius)": external_temperature,
         "Weight of milk in tank (Kg)": weight_of_milk_in_tank,
-        "Weight ok milk difference (Kg)": weight_of_milk_difference,
         "pH measure": ph_measure,
         "K+ measure (mg/litre)": k_measure,
         "NaCL concentration (g/litre)": nacl_concentration,
@@ -127,7 +111,6 @@ def generate_a_robot(iterate, unit_number):
         "tank_temperature": tank_temperature,
         "external_temperature": external_temperature,
         "weight_of_milk_in_tank": weight_of_milk_in_tank,
-        "weight_of_milk_difference": weight_of_milk_difference,
         "ph_measure": ph_measure,
         "k_measure": k_measure,
         "nacl_concentration": nacl_concentration,
@@ -144,7 +127,6 @@ def generate_a_robot(iterate, unit_number):
                  "tank_temperature,"
                  "external_temperature,"
                  "weight_of_milk_in_tank,"
-                 "weight_of_milk_difference,"
                  "ph_measure,"
                  "k_measure,"
                  "nacl_concentration,"
@@ -159,7 +141,6 @@ def generate_a_robot(iterate, unit_number):
                  "%(tank_temperature)s,"
                  "%(external_temperature)s,"
                  "%(weight_of_milk_in_tank)s,"
-                 "%(weight_of_milk_difference)s,"
                  "%(ph_measure)s,"
                  "%(k_measure)s,"
                  "%(nacl_concentration)s,"
@@ -182,9 +163,12 @@ def generate_json(unit_data, i):
     filename = str(int(i) + 1) + "-" + timestamp_to_string + ".json"
 
     # Generate json file with a unit of 10 robots :
+    while True:
+        unit_data_encoded = json.dumps(unit_data).encode('utf-8')
+        server_socket.sendall(unit_data_encoded)
 
-    with open("json/" + filename, "w") as outfile:
-        json.dump(unit_data, outfile, indent=4)
+        with open("json/" + filename, "w") as outfile:
+            json.dump(unit_data, outfile, indent=4)
 
 
 def generate_a_unit(unit_number):
@@ -194,8 +178,11 @@ def generate_a_unit(unit_number):
 
 def execute_generation():
     global data
-    generate_a_unit(os.environ["UNIT"])
-    # generate_json(data, os.environ["UNIT"])
+    for y in range(5):
+        generate_a_unit(y + 1)
+        generate_json(data, y)
+    # generate_a_unit(os.environ["UNIT"]) TODO: Remetttre comme ça à la fin après les tests
+    # generate_json(data, os.environ["UNIT"]) TODO: Remetttre comme ça à la fin après les tests
     # Must empty the data, otherwise each json concatenate with the previous Unit values
     data = {'robots': []}
     threading.Timer(60.0, execute_generation).start()
