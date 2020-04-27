@@ -552,6 +552,7 @@ form {
   align-items: center;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 2rem;
 }
 .exportButton {
   width: 50%;
