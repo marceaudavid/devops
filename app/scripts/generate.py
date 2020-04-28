@@ -1,4 +1,5 @@
 import json
+import pickle
 import random
 import socket
 import threading
@@ -22,9 +23,9 @@ cursor = cnx.cursor(buffered=True)
 # Create a socket (SOCK_STREAM means a TCP socket)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind((socket.gethostname(), 5000))
-server_socket.setblocking(False)
-server_socket.listen()
-conn, addr = server_socket.accept()
+# server_socket.setblocking(False)
+server_socket.listen(5)
+clientsocket, address = server_socket.accept()
 
 
 def get_robot_type():
@@ -164,11 +165,16 @@ def generate_json(unit_data, i):
 
     # Generate json file with a unit of 10 robots :
     while True:
-        unit_data_encoded = json.dumps(unit_data).encode('utf-8')
-        server_socket.sendall(unit_data_encoded)
+        # unit_data_encoded = json.dumps(unit_data).encode('utf-8')
+        # server_socket.sendall(unit_data_encoded)
 
         with open("json/" + filename, "w") as outfile:
             json.dump(unit_data, outfile, indent=4)
+
+        unit_data_json = json.load(open("json/" + filename, "w"))
+        # unit_data_json = ['foo', {'bar': ('baz', None, 1.0, 2)}]
+        print(unit_data_json)
+        clientsocket.send(pickle.dumps(unit_data_json))
 
 
 def generate_a_unit(unit_number):
