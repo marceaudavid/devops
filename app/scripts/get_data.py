@@ -5,7 +5,10 @@ import socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.connect((socket.gethostname(), 5000))
 
+data = b""
 while True:
-    received = server_socket.recv(16)
-    dict = pickle.loads(received)
-    print(dict)
+    packet = server_socket.recv(4096)
+    if not packet: break
+    data += packet
+
+data_arr = pickle.loads(data)
