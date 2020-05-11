@@ -1,3 +1,4 @@
+import json
 import pickle
 import socket
 
@@ -5,10 +6,14 @@ import socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.connect((socket.gethostname(), 5000))
 
-data = b""
+data_dict = ""
 while True:
-    packet = server_socket.recv(4096)
-    if not packet: break
-    data += packet
+    data = server_socket.recv(195000)
+    data_dict = pickle.loads(data)
 
-data_arr = pickle.loads(data)
+    # print(data_dict.get('robots', {}))
+    for y in range(10):
+        print(data_dict.get("robots", {})[y].get("Robot number")) # Stock this in a previous variable and repeat this for each value of robot to store it in database
+
+    if data_dict != "":
+        data_dict = ""

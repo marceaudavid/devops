@@ -164,17 +164,14 @@ def generate_json(unit_data, i):
     filename = str(int(i) + 1) + "-" + timestamp_to_string + ".json"
 
     # Generate json file with a unit of 10 robots :
-    while True:
-        # unit_data_encoded = json.dumps(unit_data).encode('utf-8')
-        # server_socket.sendall(unit_data_encoded)
 
-        with open("json/" + filename, "w") as outfile:
-            json.dump(unit_data, outfile, indent=4)
+    # server_socket.sendall(unit_data_encoded)
 
-        unit_data_json = json.load(open("json/" + filename, "w"))
-        # unit_data_json = ['foo', {'bar': ('baz', None, 1.0, 2)}]
-        print(unit_data_json)
-        clientsocket.send(pickle.dumps(unit_data_json))
+    # with open(os.path.join(os.path.dirname(__file__), 'yoho')), "w") as outfile:
+    #     json.dump(unit_data, outfile, indent=4)
+
+    # unit_data_json = json.load(open("json/" + filename, "w"))
+
 
 
 def generate_a_unit(unit_number):
@@ -185,13 +182,14 @@ def generate_a_unit(unit_number):
 def execute_generation():
     global data
     for y in range(5):
-        generate_a_unit(y + 1)
+        generate_a_unit((y + 1))
         generate_json(data, y)
     # generate_a_unit(os.environ["UNIT"]) TODO: Remetttre comme ça à la fin après les tests
     # generate_json(data, os.environ["UNIT"]) TODO: Remetttre comme ça à la fin après les tests
     # Must empty the data, otherwise each json concatenate with the previous Unit values
+    clientsocket.sendall(pickle.dumps(data))
     data = {'robots': []}
-    threading.Timer(60.0, execute_generation).start()
+    threading.Timer(5.0, execute_generation).start()
 
 
 execute_generation()
