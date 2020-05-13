@@ -16,8 +16,6 @@ cnx = mysql.connector.connect(user=os.environ['MYSQL_USER'], password=os.environ
 
 cursor = cnx.cursor(buffered=True)
 
-unit_number = 0
-
 
 def get_robot_value():
     if os.environ["UNIT"] == "2":

@@ -8,9 +8,6 @@ import os
 from datetime import datetime
 from dotenv import load_dotenv
 
-# replace this with database value to swap to unit 2, 3... and implement change every 10 robot
-default_unit_number = 1
-
 load_dotenv()
 
 # Create a socket (SOCK_STREAM means a TCP socket)
