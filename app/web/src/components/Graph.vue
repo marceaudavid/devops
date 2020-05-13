@@ -416,13 +416,13 @@ export default {
         });
     },
     exportButton() {
-      // Default export is a4 paper, portrait, using millimeters for units
+      // Default export is a4 paper, landscape, using millimeters for units
       var element = document.getElementById("pdf");
       var opt = {
         filename: "graphics-generator-pdf.pdf",
         image: { type: "pdf", quality: 0.98 },
         html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+        jsPDF: { unit: "in", format: "letter", orientation: "landscape" }
       };
 
       html2pdf(element, opt);

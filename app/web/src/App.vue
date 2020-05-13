@@ -45,8 +45,12 @@ export default {
       var top = window.scrollY;
       console.log(top);
 
-      if (top >= 0 && top <= 736) {
-        window.scrollTo(0, 1000);
+      if (top >= 0 && top <= 742) {
+        window.scrollTo({
+          top: 1000,
+          left: 0,
+          behavior: "smooth"
+        });
         x.style.transform = "rotate(180deg)";
       }
       // if (top >= 728 && top <= 1456) {
@@ -56,8 +60,12 @@ export default {
       //   window.scrollTo(0, 2184);
       //   x.style.transform = "rotate(180deg)";
       // }
-      if (top >= 736 && top <= 736) {
-        window.scrollTo(0, 0);
+      if (top >= 742 && top <= 742) {
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: "smooth"
+        });
         x.style.transform = "rotate(0deg)";
       }
     }
