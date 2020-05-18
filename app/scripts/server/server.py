@@ -1,10 +1,15 @@
 import os
 import pickle
 import socket
+import time
+
 import mysql.connector
 
 # Create a socket (SOCK_STREAM means a TCP socket)
+
 from dotenv import load_dotenv
+
+time.sleep(15)
 
 load_dotenv()
 
