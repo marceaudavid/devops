@@ -29,12 +29,14 @@ services:
       - db
     env_file:
       - .env
+    ports:
+      - "5000:5000"
   unit_1:
     container_name: unit_1
     build: ./app/scripts/client
     restart: always
     depends_on:
-      - db
+      - server
     environment:
       UNIT: 1
   # unit_2:
