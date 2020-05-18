@@ -10,12 +10,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Create a socket (SOCK_STREAM means a TCP socket)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind((socket.gethostname(), 5000))
-# server_socket.setblocking(False)
-server_socket.listen(5)
-clientsocket, address = server_socket.accept()
+server_socket.connect((socket.gethostname(), 5000))
 
 
 def get_robot_type():
@@ -115,7 +111,6 @@ def generate_json(unit_data, i):
     # unit_data_json = json.load(open("json/" + filename, "w"))
 
 
-
 def generate_a_unit(unit_number):
     for i in range(10):
         generate_a_robot((i + 1), unit_number)
@@ -129,7 +124,7 @@ def execute_generation():
     # generate_a_unit(os.environ["UNIT"]) TODO: Remetttre comme ça à la fin après les tests
     # generate_json(data, os.environ["UNIT"]) TODO: Remetttre comme ça à la fin après les tests
     # Must empty the data, otherwise each json concatenate with the previous Unit values
-    clientsocket.sendall(pickle.dumps(data))
+    server_socket.sendall(pickle.dumps(data))
     data = {'robots': []}
     threading.Timer(5.0, execute_generation).start()
 

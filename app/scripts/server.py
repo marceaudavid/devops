@@ -8,8 +8,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Create a socket (SOCK_STREAM means a TCP socket)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.connect((socket.gethostname(), 5000))
+server_socket.bind((socket.gethostname(), 5000))
+# server_socket.setblocking(False)
+server_socket.listen(5)
+clientsocket, address = server_socket.accept()
 
 cnx = mysql.connector.connect(user=os.environ['MYSQL_USER'], password=os.environ['MYSQL_PASSWORD'],
                               host=os.environ['MYSQL_HOST'], database=os.environ['MYSQL_DATABASE'])
@@ -74,7 +78,7 @@ def set_robot_data(y):
 data_dict = ""
 
 while True:
-    data = server_socket.recv(195000)
+    data = clientsocket.recv(195000)
     data_dict = pickle.loads(data)
 
     print(get_robot_value()[0])
