@@ -118,15 +118,15 @@ def generate_a_unit(unit_number):
 
 def execute_generation():
     global data
-    for y in range(5):
-        generate_a_unit((y + 1))
-        generate_json(data, y)
-    # generate_a_unit(os.environ["UNIT"]) TODO: Remetttre comme ça à la fin après les tests
-    # generate_json(data, os.environ["UNIT"]) TODO: Remetttre comme ça à la fin après les tests
+    # for y in range(5): Keep it for test only
+    #     generate_a_unit((y + 1))
+    #     generate_json(data, y)
+    generate_a_unit(os.environ["UNIT"])
+    generate_json(data, os.environ["UNIT"])
     # Must empty the data, otherwise each json concatenate with the previous Unit values
     server_socket.sendall(pickle.dumps(data))
     data = {'robots': []}
-    threading.Timer(5.0, execute_generation).start()
+    threading.Timer(60.0, execute_generation).start()
 
 
 execute_generation()

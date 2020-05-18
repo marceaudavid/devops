@@ -81,10 +81,6 @@ while True:
     data = clientsocket.recv(195000)
     data_dict = pickle.loads(data)
 
-    print(get_robot_value()[0])
-    print(get_robot_value()[1])
-
-    # print(data_dict.get('robots', {}))
     for y in range(get_robot_value()[0], get_robot_value()[1]):
         add_robot = ("INSERT INTO robots "
                      "(unit_number,"
