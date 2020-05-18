@@ -1,19 +1,24 @@
 import os
 import pickle
 import socket
+import time
+
 import mysql.connector
 
 # Create a socket (SOCK_STREAM means a TCP socket)
+
 from dotenv import load_dotenv
+
+time.sleep(15)
 
 load_dotenv()
 
 # Create a socket (SOCK_STREAM means a TCP socket)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind((socket.gethostname(), 5000))
-# server_socket.setblocking(False)
-server_socket.listen(5)
-clientsocket, address = server_socket.accept()
+try:
+    server_socket.bind((socket.gethostname(), 5000))
+except socket.error:
+    print("The socket can't bind to the chosen address")
 
 cnx = mysql.connector.connect(user=os.environ['MYSQL_USER'], password=os.environ['MYSQL_PASSWORD'],
                               host=os.environ['MYSQL_HOST'], database=os.environ['MYSQL_DATABASE'])
@@ -65,6 +70,10 @@ def set_robot_data(y):
 data_dict = ""
 
 while True:
+    print("Server is ready :")
+    server_socket.listen(5)
+    clientsocket, address = server_socket.accept()
+
     data = clientsocket.recv(195000)
     data_dict = pickle.loads(data)
 
