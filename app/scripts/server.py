@@ -21,26 +21,6 @@ cnx = mysql.connector.connect(user=os.environ['MYSQL_USER'], password=os.environ
 cursor = cnx.cursor(buffered=True)
 
 
-def get_robot_value():
-    if os.environ["UNIT"] == "2":
-        start_value = 10
-        end_value = 20
-    elif os.environ["UNIT"] == "3":
-        start_value = 20
-        end_value = 30
-    elif os.environ["UNIT"] == "4":
-        start_value = 30
-        end_value = 40
-    elif os.environ["UNIT"] == "5":
-        start_value = 40
-        end_value = 50
-    else:
-        start_value = 0
-        end_value = 10
-
-    return [start_value, end_value]
-
-
 def set_robot_data(y):
     unit_number = data_dict.get("robots", {})[y].get("Unit number")
     robot_number = data_dict.get("robots", {})[y].get("Robot number")
@@ -81,7 +61,7 @@ while True:
     data = clientsocket.recv(195000)
     data_dict = pickle.loads(data)
 
-    for y in range(get_robot_value()[0], get_robot_value()[1]):
+    for y in range(0, 10):
         add_robot = ("INSERT INTO robots "
                      "(unit_number,"
                      "robot_number,"
