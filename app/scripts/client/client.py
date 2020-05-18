@@ -8,7 +8,7 @@ import os
 from datetime import datetime
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.connect((socket.gethostname(), 5000))
+server_socket.connect(("server", 5000))
 
 
 def get_robot_type():

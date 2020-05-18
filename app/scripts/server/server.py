@@ -25,15 +25,22 @@ def set_robot_data(y):
     unit_number = data_dict.get("robots", {})[y].get("Unit number")
     robot_number = data_dict.get("robots", {})[y].get("Robot number")
     robot_type = data_dict.get("robots", {})[y].get("Robot type")
-    tank_temperature = data_dict.get("robots", {})[y].get("Tank temperature (Celsius)")
-    external_temperature = data_dict.get("robots", {})[y].get("External temperature (Celsius)")
-    weight_of_milk_in_tank = data_dict.get("robots", {})[y].get("Weight of milk in tank (Kg)")
+    tank_temperature = data_dict.get(
+        "robots", {})[y].get("Tank temperature (Celsius)")
+    external_temperature = data_dict.get(
+        "robots", {})[y].get("External temperature (Celsius)")
+    weight_of_milk_in_tank = data_dict.get(
+        "robots", {})[y].get("Weight of milk in tank (Kg)")
     ph_measure = data_dict.get("robots", {})[y].get("pH measure")
     k_measure = data_dict.get("robots", {})[y].get("K+ measure (mg/litre)")
-    nacl_concentration = data_dict.get("robots", {})[y].get("NaCL concentration (g/litre)")
-    salmonella_bacterium_level = data_dict.get("robots", {})[y].get("Salmonella bacterium level (ppm)")
-    e_coli_bacterium_level = data_dict.get("robots", {})[y].get("E-coli bacterium level (ppm)")
-    listeria_bacterium_level = data_dict.get("robots", {})[y].get("Listeria bacterium level (ppm)")
+    nacl_concentration = data_dict.get(
+        "robots", {})[y].get("NaCL concentration (g/litre)")
+    salmonella_bacterium_level = data_dict.get(
+        "robots", {})[y].get("Salmonella bacterium level (ppm)")
+    e_coli_bacterium_level = data_dict.get(
+        "robots", {})[y].get("E-coli bacterium level (ppm)")
+    listeria_bacterium_level = data_dict.get(
+        "robots", {})[y].get("Listeria bacterium level (ppm)")
     creation_time = data_dict.get("robots", {})[y].get("Creation time")
 
     data_robot = {
