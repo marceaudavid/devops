@@ -6,9 +6,6 @@ import string
 import time
 import os
 from datetime import datetime
-from dotenv import load_dotenv
-
-load_dotenv()
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.connect((socket.gethostname(), 5000))
