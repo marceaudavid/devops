@@ -9,7 +9,7 @@ import mysql.connector
 
 from dotenv import load_dotenv
 
-time.sleep(15)
+time.sleep(20)
 
 load_dotenv()
 
