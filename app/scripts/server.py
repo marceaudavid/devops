@@ -10,7 +10,7 @@ load_dotenv()
 
 # Create a socket (SOCK_STREAM means a TCP socket)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind((socket.gethostname(), 5000))
+server_socket.bind((socket.gethostname(), os.environ["UNIT"]))
 # server_socket.setblocking(False)
 server_socket.listen(5)
 clientsocket, address = server_socket.accept()
