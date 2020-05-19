@@ -20,54 +20,55 @@ services:
     container_name: web
     build: ./app/web
     ports:
-      - "8080:80"
+      - "443:443"
+      - "80:80"
+  server:
+    container_name: server
+    build: ./app/scripts/server
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
   unit_1:
     container_name: unit_1
-    build: ./app/scripts/
+    build: ./app/scripts/client
     restart: always
     depends_on:
-      - db
+      - server
     environment:
       UNIT: 1
-    env_file:
-      - .env
-  unit_2:
-    container_name: unit_2
-    build: ./app/scripts/
-    restart: always
-    depends_on:
-      - db
-    environment:
-      UNIT: 2
-    env_file:
-      - .env
-  unit_3:
-    container_name: unit_3
-    build: ./app/scripts/
-    restart: always
-    depends_on:
-      - db
-    environment:
-      UNIT: 3
-    env_file:
-      - .env
-  unit_4:
-    container_name: unit_4
-    build: ./app/scripts/
-    restart: always
-    depends_on:
-      - db
-    environment:
-      UNIT: 4
-    env_file:
-      - .env
-  unit_5:
-    container_name: unit_5
-    build: ./app/scripts/
-    restart: always
-    depends_on:
-      - db
-    environment:
-      UNIT: 5
-    env_file:
-      - .env
+  # unit_2:
+  #   container_name: unit_2
+  #   build: ./app/scripts/client
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     UNIT: 2
+  # unit_3:
+  #   container_name: unit_3
+  #   build: ./app/scripts/client
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     UNIT: 3
+  # unit_4:
+  #   container_name: unit_4
+  #   build: ./app/scripts/client
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     UNIT: 4
+  # unit_5:
+  #   container_name: unit_5
+  #   build: ./app/scripts/client
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     UNIT: 5
