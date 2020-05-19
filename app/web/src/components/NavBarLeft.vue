@@ -2,8 +2,20 @@
   <div class="container-navBarLeft">
     <div class="filter">
       <div class="graph">
-        <router-link :to="{name: 'root'}" class="link">Graphe 1</router-link>
-        <router-link :to="{name: 'robot', params: {id: 1} }" class="link">Graphe du robot 1</router-link>
+        <router-link :to="{ name: 'root' }" class="link"
+          >Tous les Robots</router-link
+        >
+        <router-link :to="{ name: 'robots', params: { id: 1 } }" class="link"
+          >Robots 1</router-link
+        >
+        <router-link
+          :to="{ name: 'robotsCustoms', params: { id: 1 } }"
+          class="link"
+          >Robots 1 Customs</router-link
+        >
+        <router-link :to="{ name: 'units', params: { id: 1 } }" class="link"
+          >Tous les Robots de l'Unité 1</router-link
+        >
       </div>
     </div>
   </div>
@@ -14,8 +26,8 @@ export default {
   name: "NavBarLeft",
   components: {},
   props: {
-    msg: String
-  }
+    msg: String,
+  },
 };
 </script>
 
@@ -43,6 +55,7 @@ export default {
 .link {
   font-size: 30px;
   color: white;
+  padding: 1rem 0;
   outline: none;
   text-decoration: none;
 }
@@ -50,7 +63,7 @@ export default {
   background: #1a222f;
 }
 .link:active {
-  background: red;
+  background: gray;
 }
 .router-link-exact-active {
   background: #1a222f;

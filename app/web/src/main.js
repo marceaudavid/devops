@@ -1,28 +1,33 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "./App.vue";
-import Graph from "./components/Graph.vue";
+import RobotsAll from "./components/RobotsAll.vue";
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
-
-require(["./components/GraphRobot1.vue"], function(GraphRobot1) {
-  console.log(GraphRobot1);
-});
 
 const router = new VueRouter({
   mode: "history",
   routes: [
     {
       path: "/",
-      component: Graph,
+      component: RobotsAll,
       name: "root",
     },
     {
-      path: "/robot/:id(\\d+)",
-      component: (resolve) =>
-        require(["./components/GraphRobot1.vue"], resolve),
-      name: "robot",
+      path: "/robots/:id(\\d+)",
+      component: (resolve) => require(["./components/RobotsId.vue"], resolve),
+      name: "robots",
+    },
+    {
+      path: "/robots/:id(\\d+)/customs",
+      component: (resolve) => require(["./components/RobotsId2.vue"], resolve),
+      name: "robotsCustoms",
+    },
+    {
+      path: "/units/:id(\\d+)",
+      component: (resolve) => require(["./components/UnitsId.vue"], resolve),
+      name: "units",
     },
     {
       path: "*",

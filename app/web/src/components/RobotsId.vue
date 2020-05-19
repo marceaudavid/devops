@@ -1,15 +1,21 @@
 <template>
-  <div id="pdf2" class="area">
+  <div id="pdf" class="area">
     <form name="Form">
       <div class="input-field">
-        <label for="unit">Unité...</label>
+        <label for="unit">Robots...</label>
         <div class="formfield-select--container">
-          <select id="unit" name="unit" class="unit" @change="getData()" v-model="selected">
-            <option value="1">Unité 1</option>
-            <option value="2">Unité 2</option>
-            <option value="3">Unité 3</option>
-            <option value="4">Unité 4</option>
-            <option value="5">Unité 5</option>
+          <select
+            id="unit"
+            name="unit"
+            class="unit"
+            @change="getData()"
+            v-model="selected"
+          >
+            <option value="1">Robot 1</option>
+            <option value="2">Robot 2</option>
+            <option value="3">Robot 3</option>
+            <option value="4">Robot 4</option>
+            <option value="5">Robot 5</option>
           </select>
         </div>
       </div>
@@ -26,10 +32,19 @@
         </div>
       </div>
     </form>
-    <line-chart :chart-data="datacollection" :styles="styles" :height="null" :width="null"></line-chart>
+    <line-chart
+      :chart-data="datacollection"
+      :styles="styles"
+      :height="null"
+      :width="null"
+    ></line-chart>
     <div class="row-button">
       <a class="exportButton" @click="exportButton()">
-        <img class="download-upload" src="../assets/download-outline.svg" alt="download-upload" />
+        <img
+          class="download-upload"
+          src="../assets/download-outline.svg"
+          alt="download-upload"
+        />
       </a>
     </div>
   </div>
@@ -41,12 +56,12 @@ import axios from "axios";
 import html2pdf from "html2pdf.js";
 
 export default {
-  name: "GraphRobot1",
+  name: "RobotsId",
   props: {
-    msg: String
+    msg: String,
   },
   components: {
-    LineChart
+    LineChart,
   },
   data() {
     return {
@@ -74,7 +89,7 @@ export default {
         1,
         1,
         1,
-        1
+        1,
       ],
       temperatureExterieur: [
         2,
@@ -97,7 +112,7 @@ export default {
         2,
         2,
         2,
-        2
+        2,
       ],
       poidLait: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
       poidProduitFini: [
@@ -121,7 +136,7 @@ export default {
         4,
         4,
         4,
-        4
+        4,
       ],
       MesurePH: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
       MesureK: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
@@ -146,7 +161,7 @@ export default {
         10,
         10,
         10,
-        10
+        10,
       ],
       NiveauSalmonelle: [
         7,
@@ -169,7 +184,7 @@ export default {
         7,
         7,
         7,
-        7
+        7,
       ],
       NiveauEColis: [
         8,
@@ -192,7 +207,7 @@ export default {
         8,
         8,
         8,
-        8
+        8,
       ],
       NiveauBactérienListeria: [
         9,
@@ -215,7 +230,7 @@ export default {
         9,
         9,
         9,
-        9
+        9,
       ],
       time: [
         0,
@@ -238,8 +253,8 @@ export default {
         17,
         18,
         19,
-        20
-      ]
+        20,
+      ],
     };
   },
   mounted() {
@@ -251,110 +266,110 @@ export default {
       this.datacollection = {
         labels: this.time,
         datasets: [
-          //   {
-          //     label: "Température de la cuve (°C)",
-          //     backgroundColor: "rgba(255, 0, 0, 0.2)",
-          //     borderColor: "lightpink",
-          //     pointBackgroundColor: "red",
-          //     borderWidth: 1,
-          //     pointBorderColor: "red",
-          //     data: this.temperatureCuve
-          //   },
-          //   {
-          //     label: "Température extérieur (°C)",
-          //     backgroundColor: "rgba(0, 0, 255, 0.2)",
-          //     borderColor: "lightblue",
-          //     pointBackgroundColor: "blue",
-          //     borderWidth: 1,
-          //     pointBorderColor: "blue",
-          //     data: this.temperatureExterieur
-          //   },
           {
-            label: "Poid du lait (Kg)",
-            backgroundColor: "rgba(255, 255, 0, 0.2)",
-            borderColor: "orange",
-            pointBackgroundColor: "orange",
+            label: "Température de la cuve (°C)",
+            backgroundColor: "rgba(255, 0, 0, 0.2)",
+            borderColor: "lightpink",
+            pointBackgroundColor: "red",
             borderWidth: 1,
-            pointBorderColor: "orange",
-            data: this.poidLait
+            pointBorderColor: "red",
+            data: this.temperatureCuve,
           },
           {
-            label: "Poid du produit fini (Kg)",
-            backgroundColor: "rgb(138, 43, 226, 0.2)",
-            borderColor: "BlueViolet",
-            pointBackgroundColor: "BlueViolet",
+            label: "Température extérieur (°C)",
+            backgroundColor: "rgba(0, 0, 255, 0.2)",
+            borderColor: "lightblue",
+            pointBackgroundColor: "blue",
             borderWidth: 1,
-            pointBorderColor: "BlueViolet",
-            data: this.poidProduitFini
-          }
-          //   {
-          //     label: "Mesure du PH",
-          //     backgroundColor: "rgb(0, 255, 255, 0.2)",
-          //     borderColor: "Cyan",
-          //     pointBackgroundColor: "Cyan",
-          //     borderWidth: 1,
-          //     pointBorderColor: "Cyan",
-          //     data: this.MesurePH
-          //   },
-          //   {
-          //     label: "Mesure K+ (mg/L)",
-          //     backgroundColor: "rgb(169,169,169, 0.2)",
-          //     borderColor: "DarkGray",
-          //     pointBackgroundColor: "DarkGray",
-          //     borderWidth: 1,
-          //     pointBorderColor: "DarkGray",
-          //     data: this.MesureK
-          //   },
-          //   {
-          //     label: "Concentration NaCi",
-          //     backgroundColor: "rgb(165, 42, 42, 0.2)",
-          //     borderColor: "Brown",
-          //     pointBackgroundColor: "Brown",
-          //     borderWidth: 1,
-          //     pointBorderColor: "Brown",
-          //     data: this.ConcentrationNaCi
-          //   },
-          //   {
-          //     label: "Niveau de salmonelle (ppm)",
-          //     backgroundColor: "rgb(255,215,0, 0.2)",
-          //     borderColor: "Gold",
-          //     pointBackgroundColor: "Gold",
-          //     borderWidth: 1,
-          //     pointBorderColor: "Gold",
-          //     data: this.NiveauSalmonelle
-          //   },
-          //   {
-          //     label: "Niveau E-coli (ppm)",
-          //     backgroundColor: "rgb(95, 95, 95, 0.2)",
-          //     borderColor: " #5f5f5f",
-          //     pointBackgroundColor: " #5f5f5f",
-          //     borderWidth: 1,
-          //     pointBorderColor: " #5f5f5f",
-          //     data: this.NiveauEColis
-          //   },
-          //   {
-          //     label: "Niveau bactérien listeria (ppm)",
-          //     backgroundColor: "rgb(138, 43, 226, 0.2)",
-          //     borderColor: "Purple",
-          //     pointBackgroundColor: "Purple",
-          //     borderWidth: 1,
-          //     pointBorderColor: "Purple",
-          //     data: this.NiveauBactérienListeria
-          //   }
-        ]
+            pointBorderColor: "blue",
+            data: this.temperatureExterieur,
+          },
+          // {
+          //   label: "Poid du lait (Kg)",
+          //   backgroundColor: "rgba(255, 255, 0, 0.2)",
+          //   borderColor: "orange",
+          //   pointBackgroundColor: "orange",
+          //   borderWidth: 1,
+          //   pointBorderColor: "orange",
+          //   data: this.poidLait,
+          // },
+          // {
+          //   label: "Poid du produit fini (Kg)",
+          //   backgroundColor: "rgb(138, 43, 226, 0.2)",
+          //   borderColor: "BlueViolet",
+          //   pointBackgroundColor: "BlueViolet",
+          //   borderWidth: 1,
+          //   pointBorderColor: "BlueViolet",
+          //   data: this.poidProduitFini,
+          // },
+          {
+            label: "Mesure du PH",
+            backgroundColor: "rgb(0, 255, 255, 0.2)",
+            borderColor: "Cyan",
+            pointBackgroundColor: "Cyan",
+            borderWidth: 1,
+            pointBorderColor: "Cyan",
+            data: this.MesurePH,
+          },
+          {
+            label: "Mesure K+ (mg/L)",
+            backgroundColor: "rgb(169,169,169, 0.2)",
+            borderColor: "DarkGray",
+            pointBackgroundColor: "DarkGray",
+            borderWidth: 1,
+            pointBorderColor: "DarkGray",
+            data: this.MesureK,
+          },
+          {
+            label: "Concentration NaCi",
+            backgroundColor: "rgb(165, 42, 42, 0.2)",
+            borderColor: "Brown",
+            pointBackgroundColor: "Brown",
+            borderWidth: 1,
+            pointBorderColor: "Brown",
+            data: this.ConcentrationNaCi,
+          },
+          {
+            label: "Niveau de salmonelle (ppm)",
+            backgroundColor: "rgb(255,215,0, 0.2)",
+            borderColor: "Gold",
+            pointBackgroundColor: "Gold",
+            borderWidth: 1,
+            pointBorderColor: "Gold",
+            data: this.NiveauSalmonelle,
+          },
+          {
+            label: "Niveau E-coli (ppm)",
+            backgroundColor: "rgb(95, 95, 95, 0.2)",
+            borderColor: " #5f5f5f",
+            pointBackgroundColor: " #5f5f5f",
+            borderWidth: 1,
+            pointBorderColor: " #5f5f5f",
+            data: this.NiveauEColis,
+          },
+          {
+            label: "Niveau bactérien listeria (ppm)",
+            backgroundColor: "rgb(138, 43, 226, 0.2)",
+            borderColor: "Purple",
+            pointBackgroundColor: "Purple",
+            borderWidth: 1,
+            pointBorderColor: "Purple",
+            data: this.NiveauBactérienListeria,
+          },
+        ],
       };
     },
     // get
     getData() {
-      var url = `http://localhost:3000/unit/${this.selected}`;
+      var url = `http://localhost:3000/robots/${this.selected}`;
       var headers = {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       };
       axios
         .get(url, headers)
-        .then(x => {
+        .then((x) => {
           var results = x.data;
 
           var temperatureCuve = [];
@@ -409,25 +424,24 @@ export default {
           this.loaded = true;
           this.fillData();
         })
-        .catch(err => {
-          err;
+        .catch((err) => {
           // console.log(err);
+          err;
           alert("Failed to get the data 😭");
         });
     },
     exportButton() {
       // Default export is a4 paper, landscape, using millimeters for units
-      var element = document.getElementById("pdf2");
+      var element = document.getElementById("pdf");
       var opt = {
         filename: "graphics-generator-pdf.pdf",
         image: { type: "pdf", quality: 0.98 },
         html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "letter", orientation: "landscape" }
+        jsPDF: { unit: "in", format: "letter", orientation: "landscape" },
       };
-
       html2pdf(element, opt);
-    }
-  }
+    },
+  },
 };
 </script>
 
