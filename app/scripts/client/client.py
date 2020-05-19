@@ -7,8 +7,7 @@ import string
 import time
 import os
 from datetime import datetime
-
-time.sleep(20)
+from Crypto.Cipher import AES
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.connect(("server", 5000))

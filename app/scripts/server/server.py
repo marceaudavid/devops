@@ -81,7 +81,12 @@ def main() -> None:
                 else:
                     data = s.recv(400000)
                     if data:
-                        data_dict = pickle.loads(data)
+                        key = 'fesfsef874aa6597'
+                        b = bytes(key, 'utf8')
+                        cipher = AES.new(b, AES.MODE_EAX)
+                        decode = cipher.decrypt(data)
+                        print(decode)
+                        data_dict = pickle.loads(decode)
                         for y in range(10):
                             add_robot = ("INSERT INTO robots "
                                          "(unit_number,"
