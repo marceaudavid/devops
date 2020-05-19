@@ -8,7 +8,7 @@ import mysql.connector
 
 from dotenv import load_dotenv
 
-time.sleep(20)
+time.sleep(15)
 
 load_dotenv()
 
@@ -79,7 +79,7 @@ def main() -> None:
                     conn, addr = s.accept()
                     inputs.append(conn)
                 else:
-                    data = s.recv(4096)
+                    data = s.recv(400000)
                     if data:
                         data_dict = pickle.loads(data)
                         for y in range(10):
