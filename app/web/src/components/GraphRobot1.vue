@@ -410,8 +410,8 @@ export default {
           this.fillData();
         })
         .catch(err => {
-          console.log(err);
-
+          err;
+          // console.log(err);
           alert("Failed to get the data 😭");
         });
     },
@@ -435,8 +435,7 @@ export default {
 <style scoped>
 .area {
   width: 1000px;
-  padding: 2rem 0;
-  margin: 2rem auto;
+  padding: 2rem;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   display: flex;
