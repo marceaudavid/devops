@@ -17,19 +17,10 @@
         </div>
       </div>
     </form>
-    <line-chart
-      :chart-data="datacollection"
-      :styles="styles"
-      :height="null"
-      :width="null"
-    ></line-chart>
+    <line-chart :chart-data="datacollection" :styles="styles" :height="null" :width="null"></line-chart>
     <div class="row-button">
       <a class="exportButton" @click="exportButton()">
-        <img
-          class="download-upload"
-          src="../assets/download-outline.svg"
-          alt="download-upload"
-        />
+        <img class="download-upload" src="../assets/download-outline.svg" alt="download-upload" />
       </a>
     </div>
   </div>
@@ -43,10 +34,10 @@ import html2pdf from "html2pdf.js";
 export default {
   name: "RobotsId",
   props: {
-    msg: String,
+    msg: String
   },
   components: {
-    LineChart,
+    LineChart
   },
   data() {
     return {
@@ -73,7 +64,7 @@ export default {
         1,
         1,
         1,
-        1,
+        1
       ],
       temperatureExterieur: [
         2,
@@ -96,7 +87,7 @@ export default {
         2,
         2,
         2,
-        2,
+        2
       ],
       poidLait: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
       poidProduitFini: [
@@ -120,7 +111,7 @@ export default {
         4,
         4,
         4,
-        4,
+        4
       ],
       MesurePH: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
       MesureK: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
@@ -145,7 +136,7 @@ export default {
         10,
         10,
         10,
-        10,
+        10
       ],
       NiveauSalmonelle: [
         7,
@@ -168,7 +159,7 @@ export default {
         7,
         7,
         7,
-        7,
+        7
       ],
       NiveauEColis: [
         8,
@@ -191,7 +182,7 @@ export default {
         8,
         8,
         8,
-        8,
+        8
       ],
       NiveauBactérienListeria: [
         9,
@@ -214,7 +205,7 @@ export default {
         9,
         9,
         9,
-        9,
+        9
       ],
       time: [
         0,
@@ -237,8 +228,8 @@ export default {
         17,
         18,
         19,
-        20,
-      ],
+        20
+      ]
     };
   },
   mounted() {
@@ -257,7 +248,7 @@ export default {
             pointBackgroundColor: "red",
             borderWidth: 1,
             pointBorderColor: "red",
-            data: this.temperatureCuve,
+            data: this.temperatureCuve
           },
           {
             label: "Température extérieur (°C)",
@@ -266,7 +257,7 @@ export default {
             pointBackgroundColor: "blue",
             borderWidth: 1,
             pointBorderColor: "blue",
-            data: this.temperatureExterieur,
+            data: this.temperatureExterieur
           },
           // {
           //   label: "Poid du lait (Kg)",
@@ -293,7 +284,7 @@ export default {
             pointBackgroundColor: "Cyan",
             borderWidth: 1,
             pointBorderColor: "Cyan",
-            data: this.MesurePH,
+            data: this.MesurePH
           },
           {
             label: "Mesure K+ (mg/L)",
@@ -302,7 +293,7 @@ export default {
             pointBackgroundColor: "DarkGray",
             borderWidth: 1,
             pointBorderColor: "DarkGray",
-            data: this.MesureK,
+            data: this.MesureK
           },
           {
             label: "Concentration NaCi",
@@ -311,7 +302,7 @@ export default {
             pointBackgroundColor: "Brown",
             borderWidth: 1,
             pointBorderColor: "Brown",
-            data: this.ConcentrationNaCi,
+            data: this.ConcentrationNaCi
           },
           {
             label: "Niveau de salmonelle (ppm)",
@@ -320,7 +311,7 @@ export default {
             pointBackgroundColor: "Gold",
             borderWidth: 1,
             pointBorderColor: "Gold",
-            data: this.NiveauSalmonelle,
+            data: this.NiveauSalmonelle
           },
           {
             label: "Niveau E-coli (ppm)",
@@ -329,7 +320,7 @@ export default {
             pointBackgroundColor: " #5f5f5f",
             borderWidth: 1,
             pointBorderColor: " #5f5f5f",
-            data: this.NiveauEColis,
+            data: this.NiveauEColis
           },
           {
             label: "Niveau bactérien listeria (ppm)",
@@ -338,9 +329,9 @@ export default {
             pointBackgroundColor: "Purple",
             borderWidth: 1,
             pointBorderColor: "Purple",
-            data: this.NiveauBactérienListeria,
-          },
-        ],
+            data: this.NiveauBactérienListeria
+          }
+        ]
       };
     },
     // get
@@ -348,12 +339,12 @@ export default {
       var url = `http://localhost:3000/robot`;
       var headers = {
         headers: {
-          "Content-Type": "application/json",
-        },
+          "Content-Type": "application/json"
+        }
       };
       axios
         .get(url, headers)
-        .then((x) => {
+        .then(x => {
           var results = x.data;
 
           var temperatureCuve = [];
@@ -408,7 +399,7 @@ export default {
           this.loaded = true;
           this.fillData();
         })
-        .catch((err) => {
+        .catch(err => {
           // console.log(err);
           err;
           alert("Failed to get the data 😭");
@@ -421,11 +412,11 @@ export default {
         filename: "graphics-generator-pdf.pdf",
         image: { type: "pdf", quality: 0.98 },
         html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "letter", orientation: "landscape" },
+        jsPDF: { unit: "in", format: "letter", orientation: "landscape" }
       };
       html2pdf(element, opt);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -449,6 +440,11 @@ form {
   width: 35%;
   margin-right: 2rem;
   position: relative;
+  color: #293d56;
+}
+
+h1 {
+  color: #293d56;
 }
 .formfield-select--container {
   position: relative;

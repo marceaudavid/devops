@@ -1,21 +1,20 @@
 <template>
   <div class="container-navBarLeft">
+    <div class="container-menu">
+      <h2>MENU:</h2>
+    </div>
     <div class="filter">
       <div class="graph">
-        <router-link :to="{ name: 'root' }" class="link"
-          >Tous les Robots</router-link
-        >
-        <router-link :to="{ name: 'robots', params: { id: 1 } }" class="link"
-          >Robots 1</router-link
-        >
+        <router-link :to="{ name: 'root' }" class="link">Tous les Robots</router-link>
+        <router-link
+          :to="{ name: 'units', params: { id: 1 } }"
+          class="link"
+        >Tous les Robots par Unité</router-link>
+        <router-link :to="{ name: 'robots', params: { id: 1 } }" class="link">Choix des Robots</router-link>
         <router-link
           :to="{ name: 'robotsCustoms', params: { id: 1 } }"
           class="link"
-          >Robots 1 Customs</router-link
-        >
-        <router-link :to="{ name: 'units', params: { id: 1 } }" class="link"
-          >Tous les Robots de l'Unité 1</router-link
-        >
+        >Choix des Robots Customs</router-link>
       </div>
     </div>
   </div>
@@ -26,8 +25,8 @@ export default {
   name: "NavBarLeft",
   components: {},
   props: {
-    msg: String,
-  },
+    msg: String
+  }
 };
 </script>
 
@@ -35,11 +34,19 @@ export default {
 <style scoped>
 .container-navBarLeft {
   width: 15%;
+  background-color: #293d56;
+}
+.container-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
 }
 .filter {
   background-color: #293d56;
   width: 100%;
-  height: 100%;
+  height: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
