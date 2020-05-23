@@ -12,7 +12,7 @@ time.sleep(15)
 
 load_dotenv()
 
-cnx = mysql.connector.connect(user=os.environ['MYSQL_USER'], password=os.environ['MYSQL_PASSWORD'],
+cnx = mysql.connector.connect(user=os.environ['MYSQL_CONCENTRATEUR_DOCKER_USER'], password=os.environ['MYSQL_CONCENTRATEUR_DOCKER_PASSWORD'],
                               host=os.environ['MYSQL_HOST'], database=os.environ['MYSQL_DATABASE'])
 
 cursor = cnx.cursor(buffered=True)
