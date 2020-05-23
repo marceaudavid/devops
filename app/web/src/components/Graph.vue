@@ -26,7 +26,7 @@
         </div>
       </div>
     </form>
-    <line-chart :chart-data="datacollection"></line-chart>
+    <line-chart :chart-data="datacollection" :styles="styles" :height="null" :width="null"></line-chart>
     <div class="row-button">
       <a class="exportButton" @click="exportButton()">
         <img class="download-upload" src="../assets/download-outline.svg" alt="download-upload" />
@@ -434,11 +434,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .area {
-  width: 600px;
-  height: 89vh;
-  margin: auto;
+  width: 1000px;
+  padding: 2rem 0;
   margin: 2rem auto;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -552,7 +551,7 @@ form {
   align-items: center;
   border-radius: 5px;
   cursor: pointer;
-  margin: 2rem 10px 10px 10px;
+  margin-top: 2rem;
 }
 .exportButton {
   width: 100px;

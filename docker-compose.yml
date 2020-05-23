@@ -6,21 +6,22 @@ services:
     restart: always
     ports:
       - "3306:3306"
-  # api:
-  #   container_name: api
-  #   build: ./app/api
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   env_file:
-  #     - .env
-  #   ports:
-  #     - "3000:3000"
-  # web:
-  #   container_name: web
-  #   build: ./app/web
-  #   ports:
-  #     - "8080:80"
+  api:
+    container_name: api
+    build: ./app/api
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+  web:
+    container_name: web
+    build: ./app/web
+    ports:
+      - "443:443"
+      - "80:80"
   server:
     container_name: server
     build: ./app/scripts/server
