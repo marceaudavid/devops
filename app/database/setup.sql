@@ -20,3 +20,6 @@ CREATE TABLE robots (
     creation_time DATETIME NOT NULL,
     insertion_time DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE USER 'delegate'@'localhost' IDENTIFIED BY 'delegate';
+GRANT CREATE, DROP, GRANT OPTION, INSERT, SELECT, UPDATE, DELETE ON * . * TO 'delegate'@'localhost';
