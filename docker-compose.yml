@@ -1,11 +1,11 @@
-version: "3"
+version: '3'
 services:
   db:
     container_name: mariadb
     build: ./app/database
     restart: always
     ports:
-      - "3306:3306"
+      - '3306:3306'
   api:
     container_name: api
     build: ./app/api
@@ -15,13 +15,13 @@ services:
     env_file:
       - .env
     ports:
-      - "3000:3000"
+      - '3000:3000'
   web:
     container_name: web
     build: ./app/web
     ports:
-      - "443:443"
-      - "80:80"
+      - '443:443'
+      - '80:80'
   server:
     container_name: server
     build: ./app/scripts/server
@@ -31,7 +31,7 @@ services:
     env_file:
       - .env
     ports:
-      - "5000:5000"
+      - '5000:5000'
   unit_1:
     container_name: unit_1
     build: ./app/scripts/client
@@ -40,35 +40,35 @@ services:
       - server
     environment:
       UNIT: 1
-  # unit_2:
-  #   container_name: unit_2
-  #   build: ./app/scripts/client
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     UNIT: 2
-  # unit_3:
-  #   container_name: unit_3
-  #   build: ./app/scripts/client
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     UNIT: 3
-  # unit_4:
-  #   container_name: unit_4
-  #   build: ./app/scripts/client
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     UNIT: 4
-  # unit_5:
-  #   container_name: unit_5
-  #   build: ./app/scripts/client
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     UNIT: 5
+  unit_2:
+    container_name: unit_2
+    build: ./app/scripts/client
+    restart: always
+    depends_on:
+      - db
+    environment:
+      UNIT: 2
+  unit_3:
+    container_name: unit_3
+    build: ./app/scripts/client
+    restart: always
+    depends_on:
+      - db
+    environment:
+      UNIT: 3
+  unit_4:
+    container_name: unit_4
+    build: ./app/scripts/client
+    restart: always
+    depends_on:
+      - db
+    environment:
+      UNIT: 4
+  unit_5:
+    container_name: unit_5
+    build: ./app/scripts/client
+    restart: always
+    depends_on:
+      - db
+    environment:
+      UNIT: 5

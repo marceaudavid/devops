@@ -15,24 +15,51 @@ Data REST API: http://localhost:3000
 
 Dashboard UI: http://localhost:8080
 
-## Architecture diagram
+## Jenkins (CI/CD)
 
-![schema_projet_devops](https://user-images.githubusercontent.com/35221633/80352136-b820df00-8873-11ea-849d-9c606d1beea1.png)
+```bash
+docker network create jenkins
+docker volume create jenkins-certs
+docker volume create jenkins-data
 
-## Architecture Git :
+docker container run
+  --name jenkins
+  --rm
+  --detach
+  --privileged
+  --network jenkins
+  --network-alias docker
+  --env DOCKER_TLS_CERTDIR=/certs
+  --volume jenkins-certs:/certs/client
+  --volume jenkins-data:/var/jenkins_home
+  --publish 2376:2376
+  docker:dind
 
-![Architecture Git](https://user-images.githubusercontent.com/35221633/80352368-1352d180-8874-11ea-8cc7-b2ceec77454b.png)
+  docker container run
+  --name jenkins-blueocean
+  --rm
+  --detach
+  --network jenkins
+  --env DOCKER_HOST=tcp://docker:2376
+  --env DOCKER_CERT_PATH=/certs/client
+  --env DOCKER_TLS_VERIFY=1
+  --publish 8080:8080
+  --publish 50000:50000
+  --volume jenkins-certs:/certs/client:ro
+  --volume jenkins-data:/var/jenkins_home
+  jenkinsci/blueocean
+```
 
-## The definition of Done :
+```bash
 
-![def du donne](https://user-images.githubusercontent.com/35221633/80352784-b4418c80-8874-11ea-8ca4-b2a6e2da0a44.png)
-
-## Task management :
-
-![Done](https://user-images.githubusercontent.com/35221633/80352836-c4596c00-8874-11ea-82f7-8d44efd3710f.png)
+```
 
 ## Team
 
 - Alexandre Suchot ([AlexSuchot](https://github.com/AlexSuchot))
 - Corentin Guillard ([CorentinGlrd5](https://github.com/CorentinGlrd5))
 - Marceau David ([marceaudavid](https://github.com/marceaudavid))
+
+```
+
+```
