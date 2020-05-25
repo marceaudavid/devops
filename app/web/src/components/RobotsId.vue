@@ -346,7 +346,7 @@ export default {
     },
     // get
     getData() {
-      var url = `http://localhost:3000/robots/${this.selected}`;
+      var url = `http://localhost:3000/robot/${this.selected}`;
       var headers = {
         headers: {
           "Content-Type": "application/json"

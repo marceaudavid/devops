@@ -346,7 +346,7 @@ export default {
     },
     // get
     getData() {
-      var url = `http://localhost:3000/units/${this.selected}`;
+      var url = `http://localhost:3000/unit/${this.selected}`;
       var headers = {
         headers: {
           "Content-Type": "application/json"
