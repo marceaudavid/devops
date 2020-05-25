@@ -21,13 +21,13 @@ CREATE TABLE robots (
     insertion_time DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE USER 'admin_delegate'@'localhost' IDENTIFIED BY 'admin_delegate';
-GRANT CREATE, DROP, GRANT OPTION, INSERT, SELECT, UPDATE, DELETE ON  devops. * TO 'admin_delegate'@'localhost';
+CREATE USER 'admin_delegate'@'%' IDENTIFIED BY 'admin_delegate';
+GRANT CREATE, DROP, GRANT OPTION, INSERT, SELECT, UPDATE, DELETE ON  devops.* TO 'admin_delegate'@'%';
 
-CREATE USER 'concentrateur_docker'@'localhost' IDENTIFIED BY 'concentrateur_docker';
-GRANT INSERT, SELECT on devops.robots TO 'concentrateur_docker'@'localhost';
+CREATE USER 'concentrateur_docker'@'%' IDENTIFIED BY 'concentrateur_docker';
+GRANT INSERT, SELECT on devops.robots TO 'concentrateur_docker'@'%';
 
-CREATE USER 'data_vision'@'localhost' IDENTIFIED BY 'data_vision';
-GRANT SELECT on devops.robots TO 'data_vision'@'localhost';
+CREATE USER 'data_vision'@'%' IDENTIFIED BY 'data_vision';
+GRANT SELECT on devops.robots TO 'data_vision'@'%';
 
 FLUSH PRIVILEGES;

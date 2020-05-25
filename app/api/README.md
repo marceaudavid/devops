@@ -6,4 +6,4 @@
 | ------------- | --------------- | -------------------------------------- |
 | `/robot`      | `GET`           | Get all robot's data                   |
 | `/robot/:id`  | `GET`           | Get a robot data by his id             |
-| `/units/:id`  | `GET`           | Get all robot data belonging to a unit |
+| `/unit/:id`   | `GET`           | Get all robot data belonging to a unit |

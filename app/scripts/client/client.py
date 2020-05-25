@@ -97,11 +97,11 @@ def generate_json(unit_data, i):
     # Generate uniq name :
     timestamp = time.time()
     timestamp_to_string = datetime.utcfromtimestamp(
-        timestamp).strftime('%Y-%m-%d %H-%M-%S')
+        timestamp).strftime('%Y-%m-%d-%H-%M-%S')
 
     filename = str(int(i) + 1) + "-" + timestamp_to_string + ".json"
 
-    with open('../json/' + filename, "w") as outfile:
+    with open(filename, "w") as outfile:
         json.dump(unit_data, outfile, indent=4)
 
 
