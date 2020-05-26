@@ -22,7 +22,7 @@ def generate_file():
     filename = datetime + ".sql"
     file = open(filename, "x")
     os.system("mysqldump --databases devops -u admin_delegate --password=admin_delegate --single-transaction >" + filename)
-    threading.Timer(os.environ["BACK_UP_TIME"], generate_file).start()
+    threading.Timer(86400, generate_file).start()
 
 
 generate_file()

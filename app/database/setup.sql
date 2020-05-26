@@ -2,6 +2,7 @@ CREATE TABLE units (
     id INT AUTO_INCREMENT PRIMARY KEY,
     robot_number INT
 );
+-- ENGINE=InnoDB ENCRYPTED=YES;
 
 CREATE TABLE robots (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -20,6 +21,7 @@ CREATE TABLE robots (
     creation_time DATETIME NOT NULL,
     insertion_time DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+--  ENGINE=InnoDB ENCRYPTED=YES;
 
 CREATE USER 'admin_delegate'@'%' IDENTIFIED BY 'admin_delegate';
 GRANT CREATE, DROP, GRANT OPTION, INSERT, SELECT, UPDATE, DELETE ON  devops.* TO 'admin_delegate'@'%';
