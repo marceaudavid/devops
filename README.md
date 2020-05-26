@@ -8,6 +8,8 @@ Make sure Docker is installed and running and run :
 docker-compose build
 docker-compose up
 ```
+## Project architecture
+![alt text](https://zupimages.net/up/20/22/ysi6.png)
 
 ## Endpoints
 
@@ -53,6 +55,18 @@ docker container run
 ```bash
 
 ```
+
+## Database
+
+The Database is managed with Mariadb, default port : 3306
+
+You can request on the table robots with appropriate user : 
+```sql
+SELECT * FROM robots;
+```
+
+
+
 
 ## Team
 
