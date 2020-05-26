@@ -8,11 +8,11 @@ import mysql.connector
 
 from dotenv import load_dotenv
 
-time.sleep(20)
+time.sleep(15)
 
 load_dotenv()
 
-cnx = mysql.connector.connect(user=os.environ['MYSQL_USER'], password=os.environ['MYSQL_PASSWORD'],
+cnx = mysql.connector.connect(user=os.environ['MYSQL_CONCENTRATEUR_DOCKER_USER'], password=os.environ['MYSQL_CONCENTRATEUR_DOCKER_USER_PASSWORD'],
                               host=os.environ['MYSQL_HOST'], database=os.environ['MYSQL_DATABASE'])
 
 cursor = cnx.cursor(buffered=True)
@@ -22,15 +22,22 @@ def set_robot_data(data_dict, y):
     unit_number = data_dict.get("robots", {})[y].get("Unit number")
     robot_number = data_dict.get("robots", {})[y].get("Robot number")
     robot_type = data_dict.get("robots", {})[y].get("Robot type")
-    tank_temperature = data_dict.get("robots", {})[y].get("Tank temperature (Celsius)")
-    external_temperature = data_dict.get("robots", {})[y].get("External temperature (Celsius)")
-    weight_of_milk_in_tank = data_dict.get("robots", {})[y].get("Weight of milk in tank (Kg)")
+    tank_temperature = data_dict.get(
+        "robots", {})[y].get("Tank temperature (Celsius)")
+    external_temperature = data_dict.get(
+        "robots", {})[y].get("External temperature (Celsius)")
+    weight_of_milk_in_tank = data_dict.get(
+        "robots", {})[y].get("Weight of milk in tank (Kg)")
     ph_measure = data_dict.get("robots", {})[y].get("pH measure")
     k_measure = data_dict.get("robots", {})[y].get("K+ measure (mg/litre)")
-    nacl_concentration = data_dict.get("robots", {})[y].get("NaCL concentration (g/litre)")
-    salmonella_bacterium_level = data_dict.get("robots", {})[y].get("Salmonella bacterium level (ppm)")
-    e_coli_bacterium_level = data_dict.get("robots", {})[y].get("E-coli bacterium level (ppm)")
-    listeria_bacterium_level = data_dict.get("robots", {})[y].get("Listeria bacterium level (ppm)")
+    nacl_concentration = data_dict.get(
+        "robots", {})[y].get("NaCL concentration (g/litre)")
+    salmonella_bacterium_level = data_dict.get(
+        "robots", {})[y].get("Salmonella bacterium level (ppm)")
+    e_coli_bacterium_level = data_dict.get(
+        "robots", {})[y].get("E-coli bacterium level (ppm)")
+    listeria_bacterium_level = data_dict.get(
+        "robots", {})[y].get("Listeria bacterium level (ppm)")
     creation_time = data_dict.get("robots", {})[y].get("Creation time")
 
     data_robot = {
@@ -72,14 +79,15 @@ def main() -> None:
 
         while inputs:
             # wait for at least one of the sockets to be ready for processing
-            readable, writable, exceptional = select.select(inputs, outputs, inputs)
+            readable, writable, exceptional = select.select(
+                inputs, outputs, inputs)
 
             for s in readable:
                 if s is sock:
                     conn, addr = s.accept()
                     inputs.append(conn)
                 else:
-                    data = s.recv(4096)
+                    data = s.recv(400000)
                     if data:
                         data_dict = pickle.loads(data)
                         for y in range(10):

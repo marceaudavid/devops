@@ -1,3 +1,4 @@
+import json
 import pickle
 import random
 import socket
@@ -96,18 +97,12 @@ def generate_json(unit_data, i):
     # Generate uniq name :
     timestamp = time.time()
     timestamp_to_string = datetime.utcfromtimestamp(
-        timestamp).strftime('%Y-%m-%d %H-%M-%S')
+        timestamp).strftime('%Y-%m-%d-%H-%M-%S')
 
     filename = str(int(i) + 1) + "-" + timestamp_to_string + ".json"
 
-    # Generate json file with a unit of 10 robots :
-
-    # server_socket.sendall(unit_data_encoded)
-
-    # with open(os.path.join(os.path.dirname(__file__), 'yoho')), "w") as outfile:
-    #     json.dump(unit_data, outfile, indent=4)
-
-    # unit_data_json = json.load(open("json/" + filename, "w"))
+    with open(filename, "w") as outfile:
+        json.dump(unit_data, outfile, indent=4)
 
 
 def generate_a_unit(unit_number):

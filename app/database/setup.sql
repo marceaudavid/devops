@@ -20,3 +20,14 @@ CREATE TABLE robots (
     creation_time DATETIME NOT NULL,
     insertion_time DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE USER 'admin_delegate'@'%' IDENTIFIED BY 'admin_delegate';
+GRANT CREATE, DROP, GRANT OPTION, INSERT, SELECT, UPDATE, DELETE ON  devops.* TO 'admin_delegate'@'%';
+
+CREATE USER 'concentrateur_docker'@'%' IDENTIFIED BY 'concentrateur_docker';
+GRANT INSERT, SELECT on devops.robots TO 'concentrateur_docker'@'%';
+
+CREATE USER 'data_vision'@'%' IDENTIFIED BY 'data_vision';
+GRANT SELECT on devops.robots TO 'data_vision'@'%';
+
+FLUSH PRIVILEGES;
