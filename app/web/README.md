@@ -1,44 +1,57 @@
-# Web
+# Au bon beurre
 
-## Project setup
+Au bon beurre is a site coded in VueJs. You can see graphs to visualize the data of robots and units.
 
-```
-yarn install
-```
+## Installation
 
-### Compiles and hot-reloads for development
+Use the VueJs language. Documentation [VueJs](https://vuejs.org/v2/guide/).
 
-```
-yarn serve
-```
+Use [git](https://git-scm.com/downloads/).
 
-### Compiles and minifies for production
+## Usage
 
-```
-yarn build
+First clone the project:
+
+```git
+git clone https://github.com/marceaudavid/devops.git
 ```
 
-### Enable HTTPS with self-signed SSL certificates
-
-Open the hosts file with a text editor
+Second, go in folder App and Web:
 
 ```bash
-sudo vim /etc/hosts;
+cd App/Web
 ```
 
-Add this line to configure our domain name to point on localhost
+Third, install dependencies:
 
 ```bash
-# Added by devops project
-127.0.0.1               devops.com
+npm install
 ```
 
-### Lints and fixes files
+Fourth, go this project:
 
+```bash
+npm run serve
 ```
-yarn lint
+
+finaly, open the window and have fun !
+
+http://localhost:8080/
+
+## Dependencies
+
+```json
+  "dependencies": {
+    "axios": "^0.19.2",
+    "chart.js": "^2.9.3",
+    "core-js": "^3.6.4",
+    "html2pdf.js": "^0.9.2",
+    "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.0",
+    "vue-router": "^3.1.6"
+  }
 ```
 
-### Customize configuration
+## Contributing
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+I was alone for this school project.

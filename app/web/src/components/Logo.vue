@@ -1,6 +1,6 @@
 <template>
   <div class="container-logo">
-    <a href="#" class="col-logo">
+    <a href="/" class="col-logo">
       <img class="logo" src="./../assets/logo.svg" alt="Logo" />
     </a>
   </div>
@@ -10,8 +10,8 @@
 export default {
   name: "Logo",
   props: {
-    msg: String,
-  },
+    msg: String
+  }
 };
 </script>
 

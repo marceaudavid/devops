@@ -41,7 +41,7 @@ import axios from "axios";
 import html2pdf from "html2pdf.js";
 
 export default {
-  name: "GraphRobot1",
+  name: "RobotsId",
   props: {
     msg: String
   },
@@ -269,24 +269,6 @@ export default {
             pointBorderColor: "blue",
             data: this.temperatureExterieur
           },
-          // {
-          //   label: "Poid du lait (Kg)",
-          //   backgroundColor: "rgba(255, 255, 0, 0.2)",
-          //   borderColor: "orange",
-          //   pointBackgroundColor: "orange",
-          //   borderWidth: 1,
-          //   pointBorderColor: "orange",
-          //   data: this.poidLait,
-          // },
-          // {
-          //   label: "Poid du produit fini (Kg)",
-          //   backgroundColor: "rgb(138, 43, 226, 0.2)",
-          //   borderColor: "BlueViolet",
-          //   pointBackgroundColor: "BlueViolet",
-          //   borderWidth: 1,
-          //   pointBorderColor: "BlueViolet",
-          //   data: this.poidProduitFini,
-          // },
           {
             label: "Mesure du PH",
             backgroundColor: "rgb(0, 255, 255, 0.2)",
@@ -359,8 +341,6 @@ export default {
 
           var temperatureCuve = [];
           var temperatureExterieur = [];
-          var poidLait = [];
-          var poidProduitFini = [];
           var MesurePH = [];
           var MesureK = [];
           var ConcentrationNaCi = [];
@@ -371,8 +351,6 @@ export default {
           for (var i = 20; i >= 0; i--) {
             var tc = parseInt(results[i].tank_temperature);
             var te = parseInt(results[i].external_temperature);
-            var pl = parseInt(results[i].weight_of_milk_in_tank);
-            var pdf = parseInt(results[i].weight_of_milk_difference);
             var mp = parseInt(results[i].ph_measure);
             var mk = parseInt(results[i].k_measure);
             var cn = parseInt(results[i].nacl_concentration);
@@ -383,8 +361,6 @@ export default {
             var ti = results[i].creation_time.split("T");
             temperatureCuve.push(tc);
             temperatureExterieur.push(te);
-            poidLait.push(pl);
-            poidProduitFini.push(pdf);
             MesurePH.push(mp);
             MesureK.push(mk);
             ConcentrationNaCi.push(cn);
@@ -396,8 +372,6 @@ export default {
           }
           this.temperatureCuve = temperatureCuve;
           this.temperatureExterieur = temperatureExterieur;
-          this.poidLait = poidLait;
-          this.poidProduitFini = poidProduitFini;
           this.MesurePH = MesurePH;
           this.MesureK = MesureK;
           this.ConcentrationNaCi = ConcentrationNaCi;
@@ -410,33 +384,29 @@ export default {
           this.fillData();
         })
         .catch(err => {
-          console.log(err);
-
+          err;
           alert("Failed to get the data 😭");
         });
     },
     exportButton() {
-      // Default export is a4 paper, portrait, using millimeters for units
+      // Default export is a4 paper, landscape, using millimeters for units
       var element = document.getElementById("pdf");
       var opt = {
         filename: "graphics-generator-pdf.pdf",
         image: { type: "pdf", quality: 0.98 },
         html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+        jsPDF: { unit: "in", format: "letter", orientation: "landscape" }
       };
-
       html2pdf(element, opt);
     }
   }
 };
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .area {
   width: 1000px;
-  padding: 2rem 0;
-  margin: 2rem auto;
+  padding: 2rem;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   display: flex;
@@ -452,13 +422,11 @@ form {
   width: 35%;
   margin-right: 2rem;
   position: relative;
+  color: #293d56;
 }
 .formfield-select--container {
   position: relative;
-
   background-color: #fff;
-  border-bottom: 1px #000 solid;
-
   overflow: hidden;
   /* 
 		Le select natif pourra 
@@ -469,19 +437,15 @@ form {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-
   width: 110%;
   /* 
 		On est sûr de ne plus voir
 		la flèche native 
 	*/
-
   height: auto;
-  border: 0;
   margin: 0;
   padding: 0.75em;
   border-radius: 0;
-
   overflow: hidden;
   text-overflow: ellipsis;
   /* 
@@ -509,8 +473,9 @@ form {
   width: 100%;
   height: 2rem;
   border: none;
+  color: #293d56;
   cursor: pointer;
-  border-bottom: 1px black solid;
+  border-bottom: 1px #293d56 solid;
   /* -webkit-appearance: none; */
   margin: 0;
   /* -moz-appearance: textfield; */

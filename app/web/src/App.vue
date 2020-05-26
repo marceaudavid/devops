@@ -4,13 +4,9 @@
     <div class="container">
       <NavBarLeft />
       <div class="container-graph">
-        <Graph />
-        <GraphRobot1 />
-        <div class="contenent-arrow">
-          <a @click="functionArrow()" id="arrow">
-            <img class="arrow" src="./assets/chevron-down-outline.svg" alt="chevron-down-outline" />
-          </a>
-        </div>
+        <transition name="fade" mode="out-in">
+          <router-view></router-view>
+        </transition>
       </div>
     </div>
   </div>
@@ -19,49 +15,14 @@
 <script>
 import NavBarLeft from "./components/NavBarLeft.vue";
 import NavBarTop from "./components/NavBarTop.vue";
-import Graph from "./components/Graph.vue";
-import GraphRobot1 from "./components/GraphRobot1.vue";
 
 export default {
   name: "App",
   components: {
     NavBarLeft,
-    NavBarTop,
-    Graph,
-    GraphRobot1
+    NavBarTop
   },
-  methods: {
-    functionArrow() {
-      //récuperer la hauteur de ma page
-      // var h = window.scrollMaxY + document.body.offsetHeight;
-
-      //récuper la hauteur de ma fenetre
-      // var hauteur = window.innerHeight;
-
-      // Récuperer la balise fleche du fichier html
-      var x = document.getElementById("arrow");
-
-      // Récuperer la valeur px du body en fonction du haut de la fenetre de l'utilisateur
-      var top = window.scrollY;
-      console.log(top);
-
-      if (top >= 0 && top <= 736) {
-        window.scrollTo(0, 1000);
-        x.style.transform = "rotate(180deg)";
-      }
-      // if (top >= 728 && top <= 1456) {
-      //   window.scrollTo(0, 1456);
-      // }
-      // if (top >= 1456 && top <= 2184) {
-      //   window.scrollTo(0, 2184);
-      //   x.style.transform = "rotate(180deg)";
-      // }
-      if (top >= 736 && top <= 736) {
-        window.scrollTo(0, 0);
-        x.style.transform = "rotate(0deg)";
-      }
-    }
-  }
+  methods: {}
 };
 </script>
 
@@ -82,28 +43,19 @@ export default {
 }
 .container-graph {
   width: 85%;
-}
-.contenent-arrow {
-  position: fixed;
-  bottom: 0;
-  width: 81%;
-  height: 30px;
+  height: 93vh;
   display: flex;
-  align-content: center;
-  justify-content: flex-end;
-  margin: 2rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
 }
-#arrow {
-  width: 30px;
-  height: 30px;
-  transform: rotate(0deg);
-  transition: transform 0.5s;
-  background-color: #4eb4a8;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-.arrow {
-  width: 100%;
-  height: 100%;
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

@@ -1,17 +1,8 @@
 <template>
-  <div id="pdf2" class="area">
+  <div id="pdf" class="area">
     <form name="Form">
       <div class="input-field">
-        <label for="unit">Unité...</label>
-        <div class="formfield-select--container">
-          <select id="unit" name="unit" class="unit" @change="getData()" v-model="selected">
-            <option value="1">Unité 1</option>
-            <option value="2">Unité 2</option>
-            <option value="3">Unité 3</option>
-            <option value="4">Unité 4</option>
-            <option value="5">Unité 5</option>
-          </select>
-        </div>
+        <h1 for="unit">Tous les Robots</h1>
       </div>
 
       <div class="button-col">
@@ -41,7 +32,7 @@ import axios from "axios";
 import html2pdf from "html2pdf.js";
 
 export default {
-  name: "GraphRobot1",
+  name: "RobotsId",
   props: {
     msg: String
   },
@@ -50,7 +41,6 @@ export default {
   },
   data() {
     return {
-      selected: 1,
       datacollection: null,
       loaded: false,
       temperatureCuve: [
@@ -98,30 +88,6 @@ export default {
         2,
         2,
         2
-      ],
-      poidLait: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-      poidProduitFini: [
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4
       ],
       MesurePH: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
       MesureK: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
@@ -251,102 +217,84 @@ export default {
       this.datacollection = {
         labels: this.time,
         datasets: [
-          //   {
-          //     label: "Température de la cuve (°C)",
-          //     backgroundColor: "rgba(255, 0, 0, 0.2)",
-          //     borderColor: "lightpink",
-          //     pointBackgroundColor: "red",
-          //     borderWidth: 1,
-          //     pointBorderColor: "red",
-          //     data: this.temperatureCuve
-          //   },
-          //   {
-          //     label: "Température extérieur (°C)",
-          //     backgroundColor: "rgba(0, 0, 255, 0.2)",
-          //     borderColor: "lightblue",
-          //     pointBackgroundColor: "blue",
-          //     borderWidth: 1,
-          //     pointBorderColor: "blue",
-          //     data: this.temperatureExterieur
-          //   },
           {
-            label: "Poid du lait (Kg)",
-            backgroundColor: "rgba(255, 255, 0, 0.2)",
-            borderColor: "orange",
-            pointBackgroundColor: "orange",
+            label: "Température de la cuve (°C)",
+            backgroundColor: "rgba(255, 0, 0, 0.2)",
+            borderColor: "lightpink",
+            pointBackgroundColor: "red",
             borderWidth: 1,
-            pointBorderColor: "orange",
-            data: this.poidLait
+            pointBorderColor: "red",
+            data: this.temperatureCuve
           },
           {
-            label: "Poid du produit fini (Kg)",
-            backgroundColor: "rgb(138, 43, 226, 0.2)",
-            borderColor: "BlueViolet",
-            pointBackgroundColor: "BlueViolet",
+            label: "Température extérieur (°C)",
+            backgroundColor: "rgba(0, 0, 255, 0.2)",
+            borderColor: "lightblue",
+            pointBackgroundColor: "blue",
             borderWidth: 1,
-            pointBorderColor: "BlueViolet",
-            data: this.poidProduitFini
+            pointBorderColor: "blue",
+            data: this.temperatureExterieur
+          },
+          {
+            label: "Mesure du PH",
+            backgroundColor: "rgb(0, 255, 255, 0.2)",
+            borderColor: "Cyan",
+            pointBackgroundColor: "Cyan",
+            borderWidth: 1,
+            pointBorderColor: "Cyan",
+            data: this.MesurePH
+          },
+          {
+            label: "Mesure K+ (mg/L)",
+            backgroundColor: "rgb(169,169,169, 0.2)",
+            borderColor: "DarkGray",
+            pointBackgroundColor: "DarkGray",
+            borderWidth: 1,
+            pointBorderColor: "DarkGray",
+            data: this.MesureK
+          },
+          {
+            label: "Concentration NaCi",
+            backgroundColor: "rgb(165, 42, 42, 0.2)",
+            borderColor: "Brown",
+            pointBackgroundColor: "Brown",
+            borderWidth: 1,
+            pointBorderColor: "Brown",
+            data: this.ConcentrationNaCi
+          },
+          {
+            label: "Niveau de salmonelle (ppm)",
+            backgroundColor: "rgb(255,215,0, 0.2)",
+            borderColor: "Gold",
+            pointBackgroundColor: "Gold",
+            borderWidth: 1,
+            pointBorderColor: "Gold",
+            data: this.NiveauSalmonelle
+          },
+          {
+            label: "Niveau E-coli (ppm)",
+            backgroundColor: "rgb(95, 95, 95, 0.2)",
+            borderColor: " #5f5f5f",
+            pointBackgroundColor: " #5f5f5f",
+            borderWidth: 1,
+            pointBorderColor: " #5f5f5f",
+            data: this.NiveauEColis
+          },
+          {
+            label: "Niveau bactérien listeria (ppm)",
+            backgroundColor: "rgb(138, 43, 226, 0.2)",
+            borderColor: "Purple",
+            pointBackgroundColor: "Purple",
+            borderWidth: 1,
+            pointBorderColor: "Purple",
+            data: this.NiveauBactérienListeria
           }
-          //   {
-          //     label: "Mesure du PH",
-          //     backgroundColor: "rgb(0, 255, 255, 0.2)",
-          //     borderColor: "Cyan",
-          //     pointBackgroundColor: "Cyan",
-          //     borderWidth: 1,
-          //     pointBorderColor: "Cyan",
-          //     data: this.MesurePH
-          //   },
-          //   {
-          //     label: "Mesure K+ (mg/L)",
-          //     backgroundColor: "rgb(169,169,169, 0.2)",
-          //     borderColor: "DarkGray",
-          //     pointBackgroundColor: "DarkGray",
-          //     borderWidth: 1,
-          //     pointBorderColor: "DarkGray",
-          //     data: this.MesureK
-          //   },
-          //   {
-          //     label: "Concentration NaCi",
-          //     backgroundColor: "rgb(165, 42, 42, 0.2)",
-          //     borderColor: "Brown",
-          //     pointBackgroundColor: "Brown",
-          //     borderWidth: 1,
-          //     pointBorderColor: "Brown",
-          //     data: this.ConcentrationNaCi
-          //   },
-          //   {
-          //     label: "Niveau de salmonelle (ppm)",
-          //     backgroundColor: "rgb(255,215,0, 0.2)",
-          //     borderColor: "Gold",
-          //     pointBackgroundColor: "Gold",
-          //     borderWidth: 1,
-          //     pointBorderColor: "Gold",
-          //     data: this.NiveauSalmonelle
-          //   },
-          //   {
-          //     label: "Niveau E-coli (ppm)",
-          //     backgroundColor: "rgb(95, 95, 95, 0.2)",
-          //     borderColor: " #5f5f5f",
-          //     pointBackgroundColor: " #5f5f5f",
-          //     borderWidth: 1,
-          //     pointBorderColor: " #5f5f5f",
-          //     data: this.NiveauEColis
-          //   },
-          //   {
-          //     label: "Niveau bactérien listeria (ppm)",
-          //     backgroundColor: "rgb(138, 43, 226, 0.2)",
-          //     borderColor: "Purple",
-          //     pointBackgroundColor: "Purple",
-          //     borderWidth: 1,
-          //     pointBorderColor: "Purple",
-          //     data: this.NiveauBactérienListeria
-          //   }
         ]
       };
     },
     // get
     getData() {
-      var url = `http://localhost:3000/unit/${this.selected}`;
+      var url = `http://localhost:3000/robot`;
       var headers = {
         headers: {
           "Content-Type": "application/json"
@@ -359,8 +307,6 @@ export default {
 
           var temperatureCuve = [];
           var temperatureExterieur = [];
-          var poidLait = [];
-          var poidProduitFini = [];
           var MesurePH = [];
           var MesureK = [];
           var ConcentrationNaCi = [];
@@ -371,8 +317,6 @@ export default {
           for (var i = 20; i >= 0; i--) {
             var tc = parseInt(results[i].tank_temperature);
             var te = parseInt(results[i].external_temperature);
-            var pl = parseInt(results[i].weight_of_milk_in_tank);
-            var pdf = parseInt(results[i].weight_of_milk_difference);
             var mp = parseInt(results[i].ph_measure);
             var mk = parseInt(results[i].k_measure);
             var cn = parseInt(results[i].nacl_concentration);
@@ -383,8 +327,6 @@ export default {
             var ti = results[i].creation_time.split("T");
             temperatureCuve.push(tc);
             temperatureExterieur.push(te);
-            poidLait.push(pl);
-            poidProduitFini.push(pdf);
             MesurePH.push(mp);
             MesureK.push(mk);
             ConcentrationNaCi.push(cn);
@@ -396,8 +338,6 @@ export default {
           }
           this.temperatureCuve = temperatureCuve;
           this.temperatureExterieur = temperatureExterieur;
-          this.poidLait = poidLait;
-          this.poidProduitFini = poidProduitFini;
           this.MesurePH = MesurePH;
           this.MesureK = MesureK;
           this.ConcentrationNaCi = ConcentrationNaCi;
@@ -410,21 +350,19 @@ export default {
           this.fillData();
         })
         .catch(err => {
-          console.log(err);
-
+          err;
           alert("Failed to get the data 😭");
         });
     },
     exportButton() {
-      // Default export is a4 paper, portrait, using millimeters for units
-      var element = document.getElementById("pdf2");
+      // Default export is a4 paper, landscape, using millimeters for units
+      var element = document.getElementById("pdf");
       var opt = {
         filename: "graphics-generator-pdf.pdf",
         image: { type: "pdf", quality: 0.98 },
         html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+        jsPDF: { unit: "in", format: "letter", orientation: "landscape" }
       };
-
       html2pdf(element, opt);
     }
   }
@@ -435,8 +373,7 @@ export default {
 <style scoped>
 .area {
   width: 1000px;
-  padding: 2rem 0;
-  margin: 2rem auto;
+  padding: 2rem;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   display: flex;
@@ -452,6 +389,11 @@ form {
   width: 35%;
   margin-right: 2rem;
   position: relative;
+  color: #293d56;
+}
+
+h1 {
+  color: #293d56;
 }
 .formfield-select--container {
   position: relative;
