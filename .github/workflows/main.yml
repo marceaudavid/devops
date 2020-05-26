@@ -28,7 +28,7 @@ jobs:
         run: cd app/web/ && npm install
 
       - name: Testing
-        run: cd app/web/ && npm run test:unit
+        run: cd app/web/ && npm run test
 
       - name: Build
         run: cd app/web/ && npm run build
