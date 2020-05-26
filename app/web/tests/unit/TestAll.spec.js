@@ -1,6 +1,5 @@
 import NavBarTop from "@/components/NavBarTop.vue";
 import Logo from "@/components/Logo.vue";
-import RobotsAll from "@/components/RobotsAll.vue";
 import { shallowMount } from "@vue/test-utils";
 
 fdescribe("Logo.vue", () => {
