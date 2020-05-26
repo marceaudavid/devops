@@ -25,10 +25,10 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Install dependencies
-        run: cd /app/web/ npm run install
+        run: cd /app/web/ && npm run install
 
       - name: Testing
-        run: cd /app/web/ npm run test:unit
+        run: cd /app/web/ && npm run test:unit
 
       - name: Build
-        run: cd /app/web/ npm run build
+        run: cd /app/web/ && npm run build
