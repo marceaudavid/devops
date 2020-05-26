@@ -6,6 +6,8 @@ import mysql.connector
 
 from dotenv import load_dotenv
 
+time.sleep(20)
+
 load_dotenv()
 
 USER = os.environ['MYSQL_ADMIN_DELEGATE_USER']
@@ -25,8 +27,7 @@ def generate_file():
     datetime = time.strftime('%d-%m-%Y-%H%M%S')
     filename = datetime + ".sql"
     file = open(filename, "x")
-    dump = "mysqldump -h " + HOST + " -P 3306" + \
-        " -u " + USER + " " + DATABASE + ' > ' + filename
+    os.system("docker exec mariadb /usr/bin/mysqldump --databases devops -u admin_delegate --password=admin_delegate --single-transaction >" + filename)
     threading.Timer(10, generate_file).start()
 
 
