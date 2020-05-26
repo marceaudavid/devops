@@ -9,6 +9,10 @@ docker-compose build
 docker-compose up
 ```
 
+## Project architecture
+
+![alt text](https://zupimages.net/up/20/22/ysi6.png)
+
 ## Endpoints
 
 Data REST API: http://localhost:3000
