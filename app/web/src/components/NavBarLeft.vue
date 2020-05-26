@@ -7,12 +7,20 @@
       <div class="graph">
         <router-link :to="{ name: 'root' }" class="link">Tous les Robots</router-link>
         <router-link
-          :to="{ name: 'units', params: { id: 1 } }"
+          :to="{ name: 'RobotsAllMilkWeight' }"
+          class="link"
+        >Poid du lait de tous les Robots</router-link>
+        <router-link
+          :to="{ name: 'UnitsId', params: { id: 1 } }"
           class="link"
         >Tous les Robots par Unité</router-link>
-        <router-link :to="{ name: 'robots', params: { id: 1 } }" class="link">Choix des Robots</router-link>
         <router-link
-          :to="{ name: 'robotsCustoms', params: { id: 1 } }"
+          :to="{ name: 'UnitsIdMilkWeight', params: { id: 1 } }"
+          class="link"
+        >Poid du lait de tous les Robots par Unité</router-link>
+        <router-link :to="{ name: 'RobotsId', params: { id: 1 } }" class="link">Choix des Robots</router-link>
+        <router-link
+          :to="{ name: 'RobotsIdMilkWeight', params: { id: 1 } }"
           class="link"
         >Choix des Robots Customs</router-link>
       </div>
@@ -60,7 +68,7 @@ export default {
   justify-content: space-between;
 }
 .link {
-  font-size: 30px;
+  font-size: 25px;
   color: white;
   padding: 1rem 0;
   outline: none;

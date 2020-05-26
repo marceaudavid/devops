@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "./App.vue";
 import RobotsAll from "./components/RobotsAll.vue";
+import RobotsAllMilkWeight from "./components/RobotsAllMilkWeight.vue";
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -15,19 +16,31 @@ const router = new VueRouter({
       name: "root",
     },
     {
-      path: "/robots/:id(\\d+)",
-      component: (resolve) => require(["./components/RobotsId.vue"], resolve),
-      name: "robots",
+      path: "/MilkWeight",
+      component: RobotsAllMilkWeight,
+      name: "RobotsAllMilkWeight",
     },
     {
-      path: "/robots/:id(\\d+)/customs",
-      component: (resolve) => require(["./components/RobotsId2.vue"], resolve),
-      name: "robotsCustoms",
+      path: "/robots/:id(\\d+)",
+      component: (resolve) => require(["./components/RobotsId.vue"], resolve),
+      name: "RobotsId",
+    },
+    {
+      path: "/robots/:id(\\d+)/MilkWeight",
+      component: (resolve) =>
+        require(["./components/RobotsIdMilkWeight.vue"], resolve),
+      name: "RobotsIdMilkWeight",
     },
     {
       path: "/units/:id(\\d+)",
       component: (resolve) => require(["./components/UnitsId.vue"], resolve),
-      name: "units",
+      name: "UnitsId",
+    },
+    {
+      path: "/units/:id(\\d+)/MilkWeight",
+      component: (resolve) =>
+        require(["./components/UnitsIdMilkWeight.vue"], resolve),
+      name: "UnitsIdMilkWeight",
     },
     {
       path: "*",

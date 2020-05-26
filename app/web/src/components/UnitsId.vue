@@ -269,24 +269,6 @@ export default {
             pointBorderColor: "blue",
             data: this.temperatureExterieur
           },
-          // {
-          //   label: "Poid du lait (Kg)",
-          //   backgroundColor: "rgba(255, 255, 0, 0.2)",
-          //   borderColor: "orange",
-          //   pointBackgroundColor: "orange",
-          //   borderWidth: 1,
-          //   pointBorderColor: "orange",
-          //   data: this.poidLait,
-          // },
-          // {
-          //   label: "Poid du produit fini (Kg)",
-          //   backgroundColor: "rgb(138, 43, 226, 0.2)",
-          //   borderColor: "BlueViolet",
-          //   pointBackgroundColor: "BlueViolet",
-          //   borderWidth: 1,
-          //   pointBorderColor: "BlueViolet",
-          //   data: this.poidProduitFini,
-          // },
           {
             label: "Mesure du PH",
             backgroundColor: "rgb(0, 255, 255, 0.2)",
@@ -359,8 +341,6 @@ export default {
 
           var temperatureCuve = [];
           var temperatureExterieur = [];
-          var poidLait = [];
-          var poidProduitFini = [];
           var MesurePH = [];
           var MesureK = [];
           var ConcentrationNaCi = [];
@@ -371,8 +351,6 @@ export default {
           for (var i = 20; i >= 0; i--) {
             var tc = parseInt(results[i].tank_temperature);
             var te = parseInt(results[i].external_temperature);
-            var pl = parseInt(results[i].weight_of_milk_in_tank);
-            var pdf = parseInt(results[i].weight_of_milk_difference);
             var mp = parseInt(results[i].ph_measure);
             var mk = parseInt(results[i].k_measure);
             var cn = parseInt(results[i].nacl_concentration);
@@ -383,8 +361,6 @@ export default {
             var ti = results[i].creation_time.split("T");
             temperatureCuve.push(tc);
             temperatureExterieur.push(te);
-            poidLait.push(pl);
-            poidProduitFini.push(pdf);
             MesurePH.push(mp);
             MesureK.push(mk);
             ConcentrationNaCi.push(cn);
@@ -396,8 +372,6 @@ export default {
           }
           this.temperatureCuve = temperatureCuve;
           this.temperatureExterieur = temperatureExterieur;
-          this.poidLait = poidLait;
-          this.poidProduitFini = poidProduitFini;
           this.MesurePH = MesurePH;
           this.MesureK = MesureK;
           this.ConcentrationNaCi = ConcentrationNaCi;
@@ -410,7 +384,6 @@ export default {
           this.fillData();
         })
         .catch(err => {
-          // console.log(err);
           err;
           alert("Failed to get the data 😭");
         });
